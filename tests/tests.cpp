@@ -1,6 +1,7 @@
 #include "gtest-1.8.1/gtest.h"
 //#include "../src/string_map.h"
 
+// Tests
 TEST(TestSuite, Primero) {
     EXPECT_EQ(1,1);
 }
