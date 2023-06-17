@@ -6,6 +6,7 @@ Esta repo está hecha para tener separados los tests unitarios de cada component
 porque estoy 100% seguro de como usar los Google Tests.
 
 En `src/` van los archivos fuente de las definiciones, estructuras, implementaciones, etc. (`.h`, `.cpp`, `.hpp`)
+
 En `tests/` van los tests. Por ahora hay un solo archivo con múltiples suites porque no estaba seguro de cómo tener varios archivos.
 
 En `CMakeLists.txt` armo el ejecutable `correrTests` con `tests.cpp`. Para crearlo desde cero hay que ejecutar lo siguiente:
