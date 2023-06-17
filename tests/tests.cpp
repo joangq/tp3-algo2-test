@@ -1,23 +1,6 @@
 #include "gtest-1.8.1/gtest.h"
 #include "../src/auxiliares.h"
 
-/**
-FIXME: NO ESTA FUNCIONANDO
-
-/usr/bin/ld: CMakeFiles/correrTests.dir/tests/tests.cpp.o: in function `__gnu_cxx::new_allocator<unsigned int>::new_allocator()':
-/home/kiki/Coding/cpp/taller-tp2/tests/../src/auxiliares.cpp:6: multiple definition of `busquedaBinaria(std::vector<unsigned int, std::allocator<unsigned int> > const&, unsigned int, unsigned int, unsigned int)'; CMakeFiles/correrTests.dir/src/auxiliares.cpp.o:/home/kiki/Coding/cpp/taller-tp2/src/auxiliares.cpp:6: first defined here
-/usr/bin/ld: CMakeFiles/correrTests.dir/tests/tests.cpp.o: in function `std::_Vector_base<unsigned int, std::allocator<unsigned int> >::_Vector_impl_data::_M_swap_data(std::_Vector_base<unsigned int, std::allocator<unsigned int> >::_Vector_impl_data&)':
-/home/kiki/Coding/cpp/taller-tp2/tests/../src/auxiliares.cpp:14: multiple definition of `merge(std::vector<unsigned int, std::allocator<unsigned int> > const&, std::vector<unsigned int, std::allocator<unsigned int> > const&)'; CMakeFiles/correrTests.dir/src/auxiliares.cpp.o:/home/kiki/Coding/cpp/taller-tp2/src/auxiliares.cpp:14: first defined here
-/usr/bin/ld: CMakeFiles/correrTests.dir/tests/tests.cpp.o: in function `mergeSort(std::vector<unsigned int, std::allocator<unsigned int> >)':
-/home/kiki/Coding/cpp/taller-tp2/tests/../src/auxiliares.cpp:34: multiple definition of `mergeSort(std::vector<unsigned int, std::allocator<unsigned int> >)'; CMakeFiles/correrTests.dir/src/auxiliares.cpp.o:/home/kiki/Coding/cpp/taller-tp2/src/auxiliares.cpp:34: first defined here
-collect2: error: ld returned 1 exit status
-make[3]: *** [CMakeFiles/correrTests.dir/build.make:147: correrTests] Error 1
-make[2]: *** [CMakeFiles/Makefile2:143: CMakeFiles/correrTests.dir/all] Error 2
-make[1]: *** [CMakeFiles/Makefile2:150: CMakeFiles/correrTests.dir/rule] Error 2
-make: *** [Makefile:150: correrTests] Error 2
-
-*/
-
 TEST(testsAuxiliares, binary_search_tipico) {
 	vector<Nat> A = {5, 6, 9, 10, 20, 37, 38, 41, 42, 49};
 	for (int i = 0; i < A.size(); i++) EXPECT_EQ(busquedaBinaria(A, A[i], 0, 10), i);
