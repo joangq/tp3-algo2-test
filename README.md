@@ -28,3 +28,25 @@ Está funcionando bien en Ubuntu 22 LTS
 
 Adicionalmente, si el sistema operativo usa bash, hay dos scripts: `cleandir` y `cleanbuild`.
 El primero limpia todos los archivos creados por CMake y Make. El segundo primero ejecuta `cleandir` y después buildea el proyecto y ejecuta los tests usando los comandos anteriores.
+
+---
+
+# TODO List - Cosas pendientes
+*Objetivo:* Pasar todos los tests de la cátedra sin memory leaks.
+
+- [ ] Escribir tests para cada componente.
+  - [ ] maxHeap
+  - [ ] minHeap
+  - [ ] Puesto
+  - [ ] Lollapatuza
+- [ ] Pasar los tests personales y que cada componente no leakee.
+  - [ ] maxHeap
+  - [ ] minHeap
+  - [ ] Puesto
+  - [ ] Lollapatuza
+- [ ] Pasar todos los tests de la cátedra sin que leakee.
+- [ ] Encapsular y limpiar el código.
+  - [ ] maxHeap
+  - [ ] minHeap
+  - [ ] Puesto
+  - [ ] Lollapatuza
