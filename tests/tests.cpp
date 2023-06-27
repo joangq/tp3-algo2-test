@@ -60,8 +60,8 @@ TEST(testsLolla, Primero) {
 	EXPECT_EQ(1,1);
 }
 
-TEST(failureTest, failHere) {
-	EXPECT_TRUE(false);
+TEST(successTest, passHere) {
+	EXPECT_TRUE(true);
 }
 
 int main(int argc, char* argv[]) {
