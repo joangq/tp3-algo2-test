@@ -29,6 +29,21 @@ Está funcionando bien en Ubuntu 22 LTS
 Adicionalmente, si el sistema operativo usa bash, hay dos scripts: `cleandir` y `cleanbuild`.
 El primero limpia todos los archivos creados por CMake y Make. El segundo primero ejecuta `cleandir` y después buildea el proyecto y ejecuta los tests usando los comandos anteriores.
 
+Hay un script más, `projsetup`, que ejecutado a través de
+```sh
+. ./projsetup.sh
+```
+
+(Importante el espacio entre los puntitos)
+Setea la terminal desde la que estén para que los comandos `cleandir` y `cleanbuild` se puedan escribir así nomás (y aparte simplifica la ruta a la carpeta, que sólo ocupa espacio).
+Además, crea otro comando `memcheck` que ejecuta Valgrind sobre el ejecutable `correrTests`.
+
+---
+# Sobre GitHub Actions
+
+¡Ésta repo cuenta con GitHub Actions! En resumen significa que todos los cambios que hagan (cada vez que pusheen) se van a testear automáticamente.
+
+
 ---
 
 # TODO List - Cosas pendientes
