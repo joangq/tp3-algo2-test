@@ -79,7 +79,8 @@ class Puesto {
 
         /** FIXME: Deberiamos tener "obtenerStock" y 
                   "obtenerPromociones"? */
-
+        Stock stock();
+        Promociones promociones();
 
     private:
         /* comprasPorItem */

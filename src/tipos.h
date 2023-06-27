@@ -27,11 +27,11 @@ using Promociones = map<Producto, map<Nat, Nat>>;
 using Menu = map<Producto, Nat>;
 
 // Tipos agregados por nosotros
-using Cant = int;
+using Cant = Nat;
 //using Descuento = int;
 // using Dinero = int;
-using Id = int;
-using Item = int;
+using Id = Nat;
+using Item = Nat;
 
 struct aed2_Puesto {
     Stock stock;
