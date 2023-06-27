@@ -41,7 +41,11 @@ Además, crea otro comando `memcheck` que ejecuta Valgrind sobre el ejecutable `
 ---
 # Sobre GitHub Actions
 
-¡Ésta repo cuenta con GitHub Actions! En resumen significa que todos los cambios que hagan (cada vez que pusheen) se van a testear automáticamente.
+¡Ésta repo cuenta con GitHub Actions! En resumen significa que todos los cambios que hagan (cada vez que pusheen) se van a testear automáticamente, **sin necesidad de ejecutarlos en su máquina.**
+
+Si quieren revisarlo, en `/.github/workflows/c-cpp.yml` está especificado _qué_ debe ejecutarse cada vez que pushean un archivo. La cosa es así: Usamos CMake para crear el archivo Makefile, y usamos Make para compilar según el Makefile. Como el `main` (entry point) del proyecto usa los Google Tests, entonces el archivo compilado son directamente esos tests. Lo único que hace GitHub Actions es, según el `.yml` que escribí, ejecutar `cmake . && make correrTests && ./correrTests`, como lo haríamos normalmente.
+
+Tengo pendiente agregar una configuración para Valgrind, pero por ahora me interesa que se ejecuten los tests nomás.
 
 
 ---
