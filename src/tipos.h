@@ -38,6 +38,13 @@ using Stock = map<Producto, Nat>;
 using Promociones = map<Producto, map<Nat, Nat>>;
 using Menu = map<Producto, Nat>;
 
+// Tipos agregados por nosotros
+using Cant = int;
+//using Descuento = int;
+// using Dinero = int;
+using Id = int;
+using Item = int;
+
 struct aed2_Puesto {
     Stock stock;
     Promociones promociones;
