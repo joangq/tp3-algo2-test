@@ -5,6 +5,10 @@ TupPuesto::TupPuesto(Nat id, Puesto* puesto) {
         this->puesto = puesto;
 }
 
+minHeap::minHeap() {
+    // TODO
+}
+
 minHeap::minHeap(int n) {
     this->nodos.reserve(n);
     this->tamActual = 0;

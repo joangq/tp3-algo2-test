@@ -10,6 +10,7 @@ using namespace std;
 
 class Puesto {
     public:
+        Puesto();
         /** CrearPuesto
          * Precondicion: Los stocks y los puestos tienen las mismas
          * claves. Las claves de descuentos estan contenidas en ellas.

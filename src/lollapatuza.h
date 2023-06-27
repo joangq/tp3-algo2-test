@@ -82,14 +82,23 @@ class Lollapatuza {
 
             // FIXME: ACLARAR EL TIPO DEL MINHEAP
             diccLog<Producto, minHeap> hackeables;
+
+            infoCompras() {};
+
+            // FIXME: Esto va en .cpp
+            infoCompras(Dinero gastoTotal, diccLog<Nat, minHeap> hackeables)
+                : gastoTotal(gastoTotal), hackeables(hackeables) {};
         };
 
         /* estrLolla */
-        diccLog<IdPuesto, Puesto> puestos;
-        diccLog<Persona, infoCompras> infoPersonas;
+        diccLog<IdPuesto, Puesto> _puestos;
+        diccLog<Persona, infoCompras> _infoPersonas;
 
         // FIXME: ACLARAR EL TIPO DEL MAXHEAP
         maxHeap gastosPersonas;
+
+        // J: Ésto faltaba en estrLolla, lol.
+        set<Persona> _personas;
 };
 
 #endif //LOLLAPATUZA

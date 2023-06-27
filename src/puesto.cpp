@@ -5,6 +5,10 @@
 #include "puesto.h"
 #include "auxiliares.h"
 
+Puesto::Puesto() {
+    // TODO
+}
+
 Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
     for (auto& tup : descuentos) {
