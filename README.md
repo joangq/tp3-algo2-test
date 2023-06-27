@@ -3,7 +3,7 @@
 La repo para pasar en limpio está [acá.](https://github.com/Dante-010/tp3-algo2)
 
 Esta repo está hecha para tener separados los tests unitarios de cada componente y los tests generales de la catedra en la otra repo. Hay cosas atadas con alambre
-porque estoy 100% seguro de como usar los Google Tests.
+porque no estoy 100% seguro de como usar los Google Tests.
 
 En `src/` van los archivos fuente de las definiciones, estructuras, implementaciones, etc. (`.h`, `.cpp`, `.hpp`)
 
