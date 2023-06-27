@@ -34,6 +34,7 @@ El primero limpia todos los archivos creados por CMake y Make. El segundo primer
 # TODO List - Cosas pendientes
 *Objetivo:* Pasar todos los tests de la cátedra sin memory leaks.
 
+- [x] Pasar el pseudocódigo a C++
 - [ ] Escribir tests para cada componente.
   - [ ] maxHeap
   - [ ] minHeap
