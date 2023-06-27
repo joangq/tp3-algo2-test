@@ -6,6 +6,9 @@
 #include <vector>
 #include "tipos.h"
 #include "puesto.h"
+#include "../src/max_heap.h"
+#include "../src/min_heap.h"
+#include "../src/heap_aux.h"
 
 using namespace std;
 
@@ -78,7 +81,7 @@ class Lollapatuza {
             Dinero gastoTotal;
 
             // FIXME: ACLARAR EL TIPO DEL MINHEAP
-            diccLog<Producto, minHeap<Nat>> hackeables;
+            diccLog<Producto, minHeap> hackeables;
         };
 
         /* estrLolla */
@@ -86,7 +89,7 @@ class Lollapatuza {
         diccLog<Persona, infoCompras> infoPersonas;
 
         // FIXME: ACLARAR EL TIPO DEL MAXHEAP
-        maxHeap<Dinero> gastosPersonas;
+        maxHeap gastosPersonas;
 };
 
 #endif //LOLLAPATUZA

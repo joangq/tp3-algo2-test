@@ -5,12 +5,12 @@ TupPuesto::TupPuesto(Nat id, Puesto* puesto) {
         this->puesto = puesto;
 }
 
-MinHeap::MinHeap(int n) {
+minHeap::minHeap(int n) {
     this->nodos.reserve(n);
     this->tamActual = 0;
 }
 
-void MinHeap::agregar(TupPuesto tup) {
+void minHeap::agregar(TupPuesto tup) {
     int i = tamActual;
     nodos[i] = tup;
     tamActual++;
@@ -23,17 +23,17 @@ void MinHeap::agregar(TupPuesto tup) {
     }
 }
 
-Puesto* MinHeap::minimo() const {
+Puesto* minHeap::minimo() const {
     return nodos[0].puesto;
 }
 
-void MinHeap::removerMinimo() {
+void minHeap::removerMinimo() {
     tamActual--;
     nodos[0] = nodos[tamActual];
     hacerMinHeap(0);
 }
 
-void MinHeap::hacerMinHeap(int i) {
+void minHeap::hacerMinHeap(int i) {
     int izq = Izq(i);
     int der = Der(i);
     int menor = i;
@@ -52,7 +52,7 @@ void MinHeap::hacerMinHeap(int i) {
     }
 }
 
-void MinHeap::swap(int i, int j) {
+void minHeap::swap(int i, int j) {
     TupPuesto temp = nodos[i];
     nodos[i] = nodos[j];
     nodos[j] = temp;

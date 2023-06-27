@@ -14,9 +14,9 @@ struct TupPuesto {
     TupPuesto(Nat id, Puesto* puesto);
 };
 
-class MinHeap {
+class minHeap {
    public:
-    MinHeap(int n);
+    minHeap(int n);
 
     void agregar(TupPuesto tup);
 

@@ -17,18 +17,6 @@ using Dinero = Nat;
 template<typename K, typename V>
 using diccLog = map<K, V>;
 
-/* FIXME FIXME FIXME FIXME 
-   ACA DEBERIA IR NUESTRO
-   MIN HEAP */
-template<typename T>
-using minHeap = queue<T>;
-
-/* FIXME FIXME FIXME FIXME 
-   ACA DEBERIA IR NUESTRO
-   MAX HEAP */
-template<typename T>
-using maxHeap = queue<T>;
-
 // Los cambié para que sean Nat
 using Persona = Nat;
 using IdPuesto = Nat;

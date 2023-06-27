@@ -1,5 +1,8 @@
 #include "gtest-1.8.1/gtest.h"
 #include "../src/auxiliares.h"
+#include "../src/max_heap.h"
+#include "../src/min_heap.h"
+#include "../src/heap_aux.h"
 
 TEST(testsAuxiliares, binary_search_tipico) {
 	vector<Nat> A = {5, 6, 9, 10, 20, 37, 38, 41, 42, 49};
@@ -58,6 +61,21 @@ TEST(testsPuestos, Primero) {
 
 TEST(testsLolla, Primero) {
 	EXPECT_EQ(1,1);
+}
+
+TEST(testsMaxHeap, Primero) {
+	maxHeap h = {1, 123456};
+	h.agregar(Nodo(89, 123456));
+	EXPECT_EQ(h.maximo(), 123456);
+}
+
+TEST(testsMaxHeap, Multiples) {
+	maxHeap h = {4, 13};
+	h.agregar(Nodo(67, 10));
+	h.agregar(Nodo(66, 11));
+	h.agregar(Nodo(65, 12));
+	h.agregar(Nodo(1, 13));
+	EXPECT_EQ(h.maximo(), 10);
 }
 
 int main(int argc, char* argv[]) {
