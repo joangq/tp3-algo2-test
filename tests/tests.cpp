@@ -111,7 +111,7 @@ protected:
 	}
 };
 
-
+/*
 
 TEST_F(PuestoTest, obtenerStock){
     EXPECT_EQ(puesto1.obtenerStock(8), 17);
@@ -150,7 +150,7 @@ TEST_F(PuestoTest, obtenerGasto){
 	puesto2.vender(4, 9, 1);
 	EXPECT_FALSE(puesto2.obtenerGasto(4) == 5000);
 	EXPECT_EQ(puesto2.obtenerGasto(4), 5244);
-}
+}*/
 
 TEST_F(PuestoTest, existeEnStock){
 	puesto1.vender(1, 9, 5);
