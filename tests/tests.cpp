@@ -55,28 +55,45 @@ TEST(testsAuxiliares, merge_sort_ordenados) {
 	EXPECT_EQ(mergeSort(A), A);
 }
 
-TEST(testsPuestos, Primero) {
-	EXPECT_EQ(1,1);
-}
+class MaxHeapTest : public testing::Test {
+protected:
+	const int n = 20;
+	const int maxid = 30;
+	maxHeap h;
 
-TEST(testsLolla, Primero) {
-	EXPECT_EQ(1,1);
-}
+	void SetUp() {
+		h = {n, maxid};
+		
+		for (int i = 0; i <= 10; i++) {
+			h.agregar(Nodo(i, i));
+		}
 
-TEST(testsMaxHeap, Primero) {
-	maxHeap h = {1, 123456};
-	h.agregar(Nodo(89, 123456));
-	EXPECT_EQ(h.maximo(), 123456);
-}
+		h.agregar(Nodo(80, 28));
+		h.agregar(Nodo(100, 29));
+		h.agregar(Nodo(100, 30));
+	}
+};
 
-TEST(testsMaxHeap, Multiples) {
-	maxHeap h = {4, 13};
-	h.agregar(Nodo(67, 10));
-	h.agregar(Nodo(66, 11));
-	h.agregar(Nodo(65, 12));
-	h.agregar(Nodo(1, 13));
+TEST_F(MaxHeapTest, Maximo) {
+	EXPECT_EQ(h.maximo(), 29);
+};
+
+TEST_F(MaxHeapTest, RemoverMaximo) {
+	h.removerMaximo();
+	EXPECT_EQ(h.maximo(), 30);
+	h.removerMaximo();
+	EXPECT_EQ(h.maximo(), 28);
+};
+
+TEST_F(MaxHeapTest, ModificarGasto) {
+	h.modificarGasto(29, 0);
+	h.modificarGasto(30, 0);
+	EXPECT_EQ(h.maximo(), 28);
+	h.modificarGasto(10, 1000);
 	EXPECT_EQ(h.maximo(), 10);
-}
+	h.modificarGasto(5, 20);
+	EXPECT_EQ(h.maximo(), 10);
+};
 
 // -------------------------------------------------------------------------------------------
 // FIXME: puesto no tiene un constructor default

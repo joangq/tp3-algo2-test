@@ -21,26 +21,12 @@ void maxHeap::agregar(Nodo elem) {
 
     tamActual++;
 
-    // Sift up.
-    while (i != 0 and nodos[i].gasto > nodos[Padre(i)].gasto) {
-        int j = Padre(i);
-        swap(i, j);
-        i = j;
-    }
-
-    int j = Padre(i);
-
-    // Sift up.
-    while (i != 0 and nodos[i].gasto == nodos[j].gasto and nodos[i].id > nodos[j].id) {
-        int j = Padre(i);
-        swap(i, j);
-        i = j;
-    }    
+    siftUp(i); 
 }
 
 Id maxHeap::maximo() const { 
     // Le sumo 1 porque antes le había restado 1.
-    return nodos[0].id - 1; // Le resté 1 porque me daba +2???
+    return nodos[0].id - 1;
 }
 
 void maxHeap::removerMaximo() { 
@@ -54,17 +40,12 @@ void maxHeap::removerMaximo() {
 void maxHeap::modificarGasto(Persona persona, Nat nuevoGasto) { 
     int i = indicesPersona[persona];
     Dinero gasto = nodos[i].gasto;
+    nodos[i].gasto = nuevoGasto;
 
-
-    if (gasto < nuevoGasto) {
-        nodos[i].gasto = nuevoGasto;
+    if (nuevoGasto < gasto) {
         hacerMaxHeap(i);
-    } else if (gasto > nuevoGasto) {
-        while (i != 0 and nodos[i].gasto > nodos[Padre(i)].gasto) {
-            int j = Padre(i);
-            swap(i, j);
-            i = j;
-        }
+    } else if (nuevoGasto > gasto) {
+        siftUp(i);
     }
 }
 
@@ -73,12 +54,40 @@ void maxHeap::hacerMaxHeap(int i) {
     int der = Der(i);
     int mayor = i;
 
-    if (izq < tamActual and nodos[izq].id > nodos[mayor].id) {
-        mayor = izq;
+    Nodo nIzq = nodos[izq];
+    Nodo nDer = nodos[der];
+    Nodo nMayor  = nodos[mayor];
+
+    /*
+    Estrategia de comparación:
+        Quiero hacer sift down. Sé que el nodo actual fue actualizado con un valor menor.
+        Primero, ordeno por gastos. Entonces, me fijo si alguno de los dos hijos tiene un gasto mayor
+        (o igual) al nodo actual.
+        
+        Si vale nIzq (o nDer) >= nMayor.gasto, me fijo si los gastos son iguales, pues para ese caso hay una
+        condición especial.
+
+        Si los gastos son iguales, hago sift down únicamente si el id del nodo actual es mayor al del hijo.
+        Si no son iguales, como vale mayor o igual, entonces va a ser mayor, por lo que directamente intercambio.
+    */
+
+    if (izq < tamActual && nIzq.gasto >= nMayor.gasto) {
+        if (nIzq.gasto == nMayor.gasto) {
+            if (nMayor.id > nIzq.id)
+                mayor = izq;
+        } else {
+            mayor = izq;
+        }
+        
     }
 
-    if (der < tamActual and nodos[der].id > nodos[mayor].id) {
-        mayor = der;
+    if (der < tamActual && nDer.gasto >= nMayor.gasto) {
+        if (nDer.gasto == nMayor.gasto) {
+            if (nMayor.id > nDer.id)
+                mayor = der;
+        } else {
+            mayor = der;
+        }
     }
 
     if (mayor != i) {
@@ -90,11 +99,29 @@ void maxHeap::hacerMaxHeap(int i) {
 void maxHeap::swap(int i, int j) { 
     // Primero, swappeo los indices en el diccionario de índices.
     // Les resto 1 porque las ids guardadas en nodos son 1 más que las reales.
-    int tempIndice = nodos[i].id;
+    int tempIndice = indicesPersona[nodos[i].id - 1];
     indicesPersona[nodos[i].id - 1] = indicesPersona[nodos[j].id - 1];
-    indicesPersona[nodos[j].id - 1] = tempIndice - 1;
+    indicesPersona[nodos[j].id - 1] = tempIndice;
 
     Nodo temp = nodos[i];
     nodos[i] = nodos[j];
     nodos[j] = temp;
+}
+
+void maxHeap::siftUp(int i) {
+    // Sift up.
+    while (i != 0 && nodos[i].gasto > nodos[Padre(i)].gasto) {
+        int j = Padre(i);
+        swap(i, j);
+        i = j;
+    }
+
+    int j = Padre(i);
+
+    // Sift up.
+    while (i != 0 && nodos[i].gasto == nodos[j].gasto && nodos[i].id < nodos[j].id) {
+        int j = Padre(i);
+        swap(i, j);
+        i = j;
+    }   
 }

@@ -29,6 +29,7 @@ class maxHeap {
 
    private:
     void hacerMaxHeap(int i);
+    void siftUp(int i);
     void swap(int i, int j);
 
     vector<Nodo> nodos;
