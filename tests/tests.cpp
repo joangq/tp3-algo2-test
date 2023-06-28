@@ -152,6 +152,17 @@ TEST_F(PuestoTest, obtenerGasto){
 	EXPECT_EQ(puesto2.obtenerGasto(4), 5244);
 }
 
+TEST_F(PuestoTest, existeEnStock){
+	puesto3.vender(1, 9, 5);
+	puesto2.vender(2, 13, 1);
+	puesto1.vender(3, 13, 2);
+	EXPECT_FALSE(puesto3.existeEnStock(9));
+	EXPECT_TRUE(puesto2.existeEnStock(13));
+	EXPECT_FALSE(puesto1.existeEnStock(13));
+}
+
+
+
 // -------------------------------------------------------------------------------------------
 
 // -------------------------------------------------------------------------------------------
