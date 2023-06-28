@@ -8,10 +8,7 @@
 
 using namespace std;
 
-Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables) {
-    this->gastoTotal = gastoTotal;
-    this->hackeables = hackeables;
-}
+Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables): gastoTotal(gastoTotal), hackeables(hackeables) { };
 
 Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() { };
 
