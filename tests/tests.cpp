@@ -243,7 +243,11 @@ TEST_F(PuestoTest, cantComprasSinDesc){
 	//EXPECT_EQ(puesto3.cantComprasSinDesc(3, 8), 0);
 	
 	puesto2.vender(1, 9, 7);
-	EXPECT_EQ(puesto2.cantComprasSinDesc(1,9)0);
+	EXPECT_EQ(puesto2.cantComprasSinDesc(1,9), 0);
+	puesto2.vender(2, 9, 6);
+	puesto2.vender(2, 15, 2);
+	EXPECT_EQ(puesto2.cantComprasSinDesc(1,9), 0);
+	EXPECT_EQ(puesto2.cantComprasSinDesc(2, 15), 1);
 }
 
 
