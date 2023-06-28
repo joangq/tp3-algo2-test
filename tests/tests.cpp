@@ -102,9 +102,9 @@ protected:
     Menu menu;
 	set<Persona> personas;
 	set<IdPuesto> idsPuestos;
-	Stock stock1, stock2, stock3;
-	Promociones descuentos1, descuentos2, descuentos3;
-	Puesto puesto1, puesto2, puesto3;
+	Stock stock1, stock2, stock3, stock4;
+	Promociones descuentos1, descuentos2, descuentos3, descuentos4;
+	Puesto puesto1, puesto2, puesto3, puesto4;
 	map<IdPuesto, Puesto> puestos;
 
 	void SetUp() {
