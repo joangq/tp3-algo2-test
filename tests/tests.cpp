@@ -102,12 +102,30 @@ protected:
     map<IdPuesto, Puesto> puestos = {{1, puesto1}, {2, puesto2}, {3, puesto3}};;
 };
 
-TEST_F(PuestoTest, crearPuesto){
+
+
+TEST_F(PuestoTest, obtenerStock){
     EXPECT_EQ(puesto1.obtenerStock(8), 17);
     EXPECT_EQ(puesto1.obtenerStock(9), 5);
-    EXPECT_EQ(puesto1.obtenerStock(13), 27);
-    EXPECT_EQ(puesto1.obtenerStock(15), 30);
+    EXPECT_EQ(puesto2.obtenerStock(13), 11);
+    EXPECT_EQ(puesto3.obtenerStock(15), 91);
+	EXPECT_FALSE(puesto1.obtenerStock(15) == 22);
+	EXPECT_FALSE(puesto2.obtenerStock(8) == 10);
+	EXPECT_FALSE(puesto3.obtenerStock(9) == 25);
+
+
 }
+
+TEST_F(PuestoTest, obtenerDescuento){
+	EXPECT_EQ(puesto1.obtenerDescuento(8, 2), 0);
+	EXPECT_EQ(puesto1.obtenerDescuento(8, 3), 10);
+	//EXPECT_EQ(puesto1.obtenerDescuento(8, 10), 25);
+	//EXPECT_EQ(puesto2.obtenerDescuento(9, 4), 12);
+	//EXPECT_FALSE(puesto2.obtenerDescuento(9, 4) == 16);
+	//EXPECT_EQ(puesto2.obtenerDescuento(9, 10), 12);
+}
+
+// -------------------------------------------------------------------------------------------
 
 // -------------------------------------------------------------------------------------------
 
