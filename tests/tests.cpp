@@ -78,6 +78,58 @@ TEST(testsMaxHeap, Multiples) {
 	EXPECT_EQ(h.maximo(), 10);
 }
 
+// -------------------------------------------------------------------------------------------
+// FIXME: puesto no tiene un constructor default
+class PuestoTest : public testing::Test {
+protected:
+    Menu menu = {{8, 300}, {9, 811}, {13, 1000}, {15, 127}};
+    set<Persona> personas34, personas67;
+    set<Persona> personas = {3, 4, 6, 7};
+    set<IdPuesto> idsPuestos = {1, 2, 3};
+    
+    Stock stock1 = {{8, 17}, {9, 5}, {13, 27}, {15, 30}};
+    Promociones descuentos1 = {{8, {{3, 10}, {7, 25}}}};
+	Puesto puesto1 = {menu, stock1, descuentos1};
+    
+    Stock stock2 = {{8, 21}, {9, 39}, {13, 11}, {15, 9}};
+    Promociones descuentos2 = {{9, {{4, 12}}}, {15, {{4, 23}}}};
+	Puesto puesto2 = {menu, stock2, descuentos2};
+    
+    Stock stock3 = {{8, 40}, {9, 12}, {13, 2}, {15, 91}};
+    Promociones descuentos3 = {{13, {{7, 19}}}};
+	Puesto puesto3 = {menu, stock3, descuentos3};
+
+    map<IdPuesto, Puesto> puestos = {{1, puesto1}, {2, puesto2}, {3, puesto3}};;
+};
+
+
+
+TEST_F(PuestoTest, obtenerStock){
+    EXPECT_EQ(puesto1.obtenerStock(8), 17);
+    EXPECT_EQ(puesto1.obtenerStock(9), 5);
+    EXPECT_EQ(puesto2.obtenerStock(13), 11);
+    EXPECT_EQ(puesto3.obtenerStock(15), 91);
+	EXPECT_FALSE(puesto1.obtenerStock(15) == 22);
+	EXPECT_FALSE(puesto2.obtenerStock(8) == 10);
+	EXPECT_FALSE(puesto3.obtenerStock(9) == 25);
+
+
+}
+
+TEST_F(PuestoTest, obtenerDescuento){
+	EXPECT_EQ(puesto1.obtenerDescuento(8, 2), 0);
+	EXPECT_EQ(puesto1.obtenerDescuento(8, 3), 10);
+	//EXPECT_EQ(puesto1.obtenerDescuento(8, 10), 25);
+	//EXPECT_EQ(puesto2.obtenerDescuento(9, 4), 12);
+	//EXPECT_FALSE(puesto2.obtenerDescuento(9, 4) == 16);
+	//EXPECT_EQ(puesto2.obtenerDescuento(9, 10), 12);
+}
+
+// -------------------------------------------------------------------------------------------
+
+// -------------------------------------------------------------------------------------------
+
+
 int main(int argc, char* argv[]) {
 	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
