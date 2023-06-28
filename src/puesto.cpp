@@ -108,7 +108,10 @@ Dinero Puesto::precioConDescuento(Producto item, Cantidad cant) {
     Descuento descuento = obtenerDescuento(item, cant);
     Dinero precioBase = precioSinDescuento(item, cant);
 
-    return (precioBase - (precioBase / descuento));
+    if (descuento == 0)
+        return precioBase;
+
+    return (precioBase -  (precioBase / descuento));
 }
 
 Dinero Puesto::precioSinDescuento(Producto item, Cantidad cant) {
