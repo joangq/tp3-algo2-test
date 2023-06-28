@@ -142,6 +142,13 @@ TEST_F(MinHeapTest, RemoverMinimo) {
 
 
 
+class LollapatuzaTest : public testing::Test{
+	protected:
+	Lollapatuza Lolla;
+	
+
+}
+
 // -------------------------------------------------------------------------------------------
 // FIXME: puesto no tiene un constructor default
 class PuestoTest : public testing::Test {
