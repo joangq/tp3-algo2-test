@@ -149,9 +149,9 @@ protected:
     Menu menu;
 	set<Persona> personas;
 	set<IdPuesto> idsPuestos;
-	Stock stock1, stock2, stock3;
-	Promociones descuentos1, descuentos2, descuentos3;
-	Puesto puesto1, puesto2, puesto3;
+	Stock stock1, stock2, stock3, stock4;
+	Promociones descuentos1, descuentos2, descuentos3, descuentos4;
+	Puesto puesto1, puesto2, puesto3, puesto4;
 	map<IdPuesto, Puesto> puestos;
 
 	void SetUp() {
@@ -171,11 +171,15 @@ protected:
 		descuentos3 = {{13, {{7, 19}}}};
 		puesto3 = {menu, stock3, descuentos3};
 
+		stock4 = {{8,10}};
+		descuentos4 = {};
+		puesto4 = {menu, stock4, descuentos4};
+
 		puestos = {{1, puesto1}, {2, puesto2}, {3, puesto3}};
 	}
 };
 
-/*
+
 
 TEST_F(PuestoTest, obtenerStock){
     EXPECT_EQ(puesto1.obtenerStock(8), 17);
@@ -214,21 +218,17 @@ TEST_F(PuestoTest, obtenerGasto){
 	puesto2.vender(4, 9, 1);
 	EXPECT_FALSE(puesto2.obtenerGasto(4) == 5000);
 	EXPECT_EQ(puesto2.obtenerGasto(4), 5244);
-}*/
-
-TEST_F(PuestoTest, existeEnStock){
-	puesto1.vender(1, 9, 5);
-	//puesto2.vender(2, 13, 1);
-	puesto3.vender(3, 13, 2);
-	EXPECT_FALSE(puesto1.existeEnStock(9));
-	//EXPECT_FALSE(puesto2.existeEnStock(13));
-	EXPECT_FALSE(puesto3.existeEnStock(13));
 }
 
-/*
+TEST_F(PuestoTest, existeEnStock){
+	EXPECT_TRUE(puesto1.existeEnStock(8));
+	EXPECT_FALSE(puesto4.existeEnStock(13));
+	EXPECT_TRUE(puesto2.existeEnStock(9));
+}
+
 TEST_F(PuestoTest, cantComprasSinDesc){
 	EXPECT_EQ(puesto1.cantComprasSinDesc(1,9), 0);
-}*/
+}
 
 
 
