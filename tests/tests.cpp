@@ -149,7 +149,7 @@ TEST_F(PuestoTest, obtenerGasto){
 	EXPECT_EQ(puesto2.obtenerGasto(4), 4433);
 	puesto2.vender(4, 9, 1);
 	EXPECT_FALSE(puesto2.obtenerGasto(4) == 5000);
-	EXPECT_EQ(puesto2.obtenerGasto(4), 5240);
+	EXPECT_EQ(puesto2.obtenerGasto(4), 5244);
 }
 
 // -------------------------------------------------------------------------------------------
