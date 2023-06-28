@@ -67,37 +67,26 @@ class Lollapatuza {
          * Complejidad: O(1)
         */
         diccLog<IdPuesto, Puesto> obtenerPuestos();
-    
+
     private:
+    struct infoCompras {
+        Dinero gastoTotal;
+        diccLog<Producto, minHeap> hackeables;
+
+        infoCompras();
+        infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables);  
+    };
         /** idMaximo (privado)
          * Precondicion: Deben haber personas en el festival.
          * Complejidad: O(A)
          * Descripcion: Devuelve el ID maximo de todas las personas.
         */
-        Persona idMaximo(set<Persona> p);
-
-        /* infoCompras */
-        struct infoCompras {
-            Dinero gastoTotal;
-
-            // FIXME: ACLARAR EL TIPO DEL MINHEAP
-            diccLog<Producto, minHeap> hackeables;
-
-            infoCompras() {};
-
-            // FIXME: Esto va en .cpp
-            infoCompras(Dinero gastoTotal, diccLog<Nat, minHeap> hackeables)
-                : gastoTotal(gastoTotal), hackeables(hackeables) {};
-        };
+        Persona idMaximo(const set<Persona>& p);
 
         /* estrLolla */
         diccLog<IdPuesto, Puesto> _puestos;
         diccLog<Persona, infoCompras> _infoPersonas;
-
-        // FIXME: ACLARAR EL TIPO DEL MAXHEAP
-        maxHeap gastosPersonas;
-
-        // J: Ésto faltaba en estrLolla, lol.
+        maxHeap _gastosPersonas;
         set<Persona> _personas;
 };
 

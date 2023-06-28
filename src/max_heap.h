@@ -36,4 +36,4 @@ class maxHeap {
     Nat tamActual;
 };
 
-#endif MAX_HEAP_H
+#endif // MAX_HEAP_H

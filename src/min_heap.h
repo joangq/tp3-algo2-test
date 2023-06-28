@@ -11,6 +11,7 @@ struct TupPuesto {
     Nat id;
     Puesto* puesto;
 
+    TupPuesto();
     TupPuesto(Nat id, Puesto* puesto);
 };
 
@@ -36,4 +37,4 @@ class minHeap {
 
 };
 
-#endif MIN_HEAP_H
+#endif // MIN_HEAP_H

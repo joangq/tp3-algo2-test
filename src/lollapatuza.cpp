@@ -8,17 +8,14 @@
 
 using namespace std;
 
-Lollapatuza::Lollapatuza(diccLog<IdPuesto, Puesto> puestos, set<Persona> personas) {
-    
-    /* FIXME: En el constructor estaba:
-        idMaximo(personas)
-        Pero idMaximo es una función
-    */
+Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables) {
+    this->gastoTotal = gastoTotal;
+    this->hackeables = hackeables;
+}
 
-    /* FIXME: No existe el contructor "maxHeap(int)"
-       this->gastosPersonas.reserve(puestos.size()); */
+Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() { };
 
-
+Lollapatuza::Lollapatuza(diccLog<IdPuesto, Puesto> puestos, set<Persona> personas) : _gastosPersonas(puestos.size(), idMaximo(personas)){
     // Creo una lista que contenga todos los items, y la lleno.
     set<Item> totalItems;
 
@@ -43,16 +40,14 @@ Lollapatuza::Lollapatuza(diccLog<IdPuesto, Puesto> puestos, set<Persona> persona
         dic[item] = minHeap(puestos.size()); // Copia implícita.
 
     for (auto persona : personas) {
-        gastosPersonas.agregar(Nodo(0, persona));
+        _gastosPersonas.agregar(Nodo(0, persona));
 
         // En las siguientes asignaciones, la copia es implícita.
-        infoCompras compras = {0, dic};
+        infoCompras compras = infoCompras(0, dic);
         this->_infoPersonas[persona] = compras;
     }
 
     this->_puestos = puestos;
-    this->gastosPersonas = gastosPersonas;
-    this->_infoPersonas = _infoPersonas;
     this->_personas = personas;
 }
 
@@ -70,7 +65,7 @@ void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, 
         if (puesto.cantComprasSinDesc(persona, item) == 0)
             compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
 
-    gastosPersonas.modificarGasto(persona, compras.gastoTotal);
+    _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
 }
 
 // J: Cambié "infoCompras" por "compras" para que no colisionen
@@ -89,7 +84,7 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
     int precioItem = puestoAHackear.precioSinDescuento(item, 1);
     compras.gastoTotal -= precioItem;
 
-    gastosPersonas.modificarGasto(persona, compras.gastoTotal);
+    _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
 }
 
 
@@ -99,7 +94,7 @@ Dinero Lollapatuza::gastoTotalPersona(Persona persona) {
 
 
 Persona Lollapatuza::personaMayorGasto() {
-    return this->gastosPersonas.maximo();
+    return _gastosPersonas.maximo();
 }
 
 IdPuesto Lollapatuza::menorStock(Producto item) {
@@ -128,7 +123,8 @@ IdPuesto Lollapatuza::menorStock(Producto item) {
                 if (stockItem == menorStock) {
                     if (pid < menorId) // FIXME (J) Este if está raro.
                         menorId = pid; // {stockIt == menSt /\ pid < menorID}
-                } else {               // \/ {stockIt != menSt}
+                } 
+                else {               // \/ {stockIt != menSt}
                     menorId = pid;     // No son la misma condición?
                 }
                 menorStock = stockItem;
@@ -139,12 +135,24 @@ IdPuesto Lollapatuza::menorStock(Producto item) {
     return menorId;
 }
 
-
 set<Persona> Lollapatuza::obtenerPersonas() {
     return this->_personas;
 }
 
-
 diccLog<IdPuesto, Puesto> Lollapatuza::obtenerPuestos() {
     return this->_puestos;
+}
+
+Persona Lollapatuza::idMaximo(const set<Persona>& personas) {
+    // Utilizo INT32_MIN para que la comparación en el ciclo for
+    // valga siempre la primera vez que ocurre.
+    int32_t idMax = INT32_MIN;
+
+    for (auto const& persona : personas) {
+        if (persona > idMax) {
+            idMax = persona;
+        }
+    }
+
+    return idMax;
 }
