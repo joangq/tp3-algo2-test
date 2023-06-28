@@ -127,6 +127,7 @@ TEST_F(PuestoTest, obtenerStock){
 
 TEST_F(PuestoTest, obtenerDescuento){
 	EXPECT_EQ(puesto1.obtenerDescuento(8, 2), 0);
+	EXPECT_EQ(puesto1.obtenerDescuento(9, 2), 0);
 	EXPECT_EQ(puesto1.obtenerDescuento(8, 3), 10);
 	EXPECT_EQ(puesto1.obtenerDescuento(8, 6), 10);
 	EXPECT_EQ(puesto1.obtenerDescuento(8, 10), 25);
@@ -142,6 +143,13 @@ TEST_F(PuestoTest, obtenerGasto){
 	puesto1.vender(3, 8, 3);
 	EXPECT_FALSE(puesto1.obtenerGasto(3) == 1409);
 	EXPECT_EQ(puesto1.obtenerGasto(3), 1410);
+
+	puesto2.vender(4, 9, 3);
+	puesto2.vender(4, 13, 2);
+	EXPECT_EQ(puesto2.obtenerGasto(4), 4433);
+	puesto2.vender(4, 9, 1);
+	EXPECT_FALSE(puesto2.obtenerGasto(4) == 5000);
+	EXPECT_EQ(puesto2.obtenerGasto(4), 5240);
 }
 
 // -------------------------------------------------------------------------------------------
