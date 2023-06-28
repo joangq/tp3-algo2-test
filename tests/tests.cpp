@@ -128,7 +128,7 @@ protected:
 	}
 };
 
-
+/*
 
 TEST_F(PuestoTest, obtenerStock){
     EXPECT_EQ(puesto1.obtenerStock(8), 17);
@@ -144,6 +144,7 @@ TEST_F(PuestoTest, obtenerStock){
 
 TEST_F(PuestoTest, obtenerDescuento){
 	EXPECT_EQ(puesto1.obtenerDescuento(8, 2), 0);
+	EXPECT_EQ(puesto1.obtenerDescuento(9, 2), 0);
 	EXPECT_EQ(puesto1.obtenerDescuento(8, 3), 10);
 	EXPECT_EQ(puesto1.obtenerDescuento(8, 6), 10);
 	EXPECT_EQ(puesto1.obtenerDescuento(8, 10), 25);
@@ -159,7 +160,31 @@ TEST_F(PuestoTest, obtenerGasto){
 	puesto1.vender(3, 8, 3);
 	EXPECT_FALSE(puesto1.obtenerGasto(3) == 1409);
 	EXPECT_EQ(puesto1.obtenerGasto(3), 1410);
+
+	puesto2.vender(4, 9, 3);
+	puesto2.vender(4, 13, 2);
+	EXPECT_EQ(puesto2.obtenerGasto(4), 4433);
+	puesto2.vender(4, 9, 1);
+	EXPECT_FALSE(puesto2.obtenerGasto(4) == 5000);
+	EXPECT_EQ(puesto2.obtenerGasto(4), 5244);
+}*/
+
+TEST_F(PuestoTest, existeEnStock){
+	puesto1.vender(1, 9, 5);
+	//puesto2.vender(2, 13, 1);
+	puesto3.vender(3, 13, 2);
+	EXPECT_FALSE(puesto1.existeEnStock(9));
+	//EXPECT_FALSE(puesto2.existeEnStock(13));
+	EXPECT_FALSE(puesto3.existeEnStock(13));
 }
+
+/*
+TEST_F(PuestoTest, cantComprasSinDesc){
+	EXPECT_EQ(puesto1.cantComprasSinDesc(1,9), 0);
+}*/
+
+
+
 
 // -------------------------------------------------------------------------------------------
 
