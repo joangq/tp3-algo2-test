@@ -78,6 +78,40 @@ TEST(testsMaxHeap, Multiples) {
 	EXPECT_EQ(h.maximo(), 10);
 }
 
+// -------------------------------------------------------------------------------------------
+// FIXME: puesto no tiene un constructor default
+class PuestoTest : public testing::Test {
+protected:
+    Menu menu = {{8, 300}, {9, 811}, {13, 1000}, {15, 127}};
+    set<Persona> personas34, personas67;
+    set<Persona> personas = {3, 4, 6, 7};
+    set<IdPuesto> idsPuestos = {1, 2, 3};
+
+    Puesto puesto1 = {menu, stock1, descuentos1};
+    Stock stock1 = {{8, 17}, {9, 5}, {13, 27}, {15, 30}};
+    Promociones descuentos1 = {{8, {{3, 10}, {7, 25}}}};
+
+    Puesto puesto2 = {menu, stock2, descuentos2};
+    Stock stock2 = {{8, 21}, {9, 39}, {13, 11}, {15, 9}};
+    Promociones descuentos2 = {{9, {{4, 12}}}, {15, {{4, 23}}}};
+
+    Puesto puesto3 = {menu, stock3, descuentos3};
+    Stock stock3 = {{8, 40}, {9, 12}, {13, 2}, {15, 91}};
+    Promociones descuentos3 = {{13, {{7, 19}}}};
+
+    map<IdPuesto, Puesto> puestos = {{1, puesto1}, {2, puesto2}, {3, puesto3}};;
+};
+
+TEST_F(PuestoTest, crearPuesto){
+    EXPECT_EQ(puesto1.obtenerStock(8), 17);
+    EXPECT_EQ(puesto1.obtenerStock(9), 5);
+    EXPECT_EQ(puesto1.obtenerStock(13), 27);
+    EXPECT_EQ(puesto1.obtenerStock(15), 30);
+}
+
+// -------------------------------------------------------------------------------------------
+
+
 int main(int argc, char* argv[]) {
 	testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
