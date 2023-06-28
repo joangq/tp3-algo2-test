@@ -95,6 +95,53 @@ TEST_F(MaxHeapTest, ModificarGasto) {
 	EXPECT_EQ(h.maximo(), 10);
 };
 
+class MinHeapTest : public testing::Test {
+protected:
+	const int n = 20;
+	minHeap h;
+	Puesto p1, p2, p3;
+
+	Menu menu;
+	set<IdPuesto> idsPuestos;
+	Stock stock1, stock2, stock3;
+	Promociones descuentos1, descuentos2, descuentos3;
+	Puesto puesto1, puesto2, puesto3;
+
+	void SetUp() {
+		h = {n};
+		
+		menu = {{8, 300}, {9, 811}, {13, 1000}, {15, 127}};
+		idsPuestos = {1, 2, 3};
+		
+		stock1 = {{8, 17}, {9, 5}, {13, 27}, {15, 30}};
+		descuentos1 = {{8, {{3, 10}, {7, 25}}}};
+		puesto1 = {menu, stock1, descuentos1};
+
+		stock2 = {{8, 21}, {9, 39}, {13, 11}, {15, 9}};
+		descuentos2 = {{9, {{4, 12}}}, {15, {{4, 23}}}};
+		puesto2 = {menu, stock2, descuentos2};
+
+		stock3 = {{8, 40}, {9, 12}, {13, 2}, {15, 91}};
+		descuentos3 = {{13, {{7, 19}}}};
+		puesto3 = {menu, stock3, descuentos3};
+
+		h.agregar(TupPuesto(3, &puesto3));
+		h.agregar(TupPuesto(1, &puesto1));
+		h.agregar(TupPuesto(2, &puesto2));
+	}
+};
+
+TEST_F(MinHeapTest, Minimo) {
+	EXPECT_TRUE(h.minimo() == &puesto1);
+};
+
+TEST_F(MinHeapTest, RemoverMinimo) {
+	h.removerMinimo();
+	EXPECT_TRUE(h.minimo() == &puesto2);
+};
+
+
+
 // -------------------------------------------------------------------------------------------
 // FIXME: puesto no tiene un constructor default
 class PuestoTest : public testing::Test {

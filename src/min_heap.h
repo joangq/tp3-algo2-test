@@ -22,9 +22,7 @@ class minHeap {
     minHeap(int n);
 
     void agregar(TupPuesto tup);
-
     Puesto* minimo() const;
-
     void removerMinimo();
 
    private:
@@ -32,9 +30,7 @@ class minHeap {
     Nat tamActual;
 
     void hacerMinHeap(int i);
-
     void swap(int i, int j);
-
 };
 
-#endif // MIN_HEAP_H
+#endif  // MIN_HEAP_H
