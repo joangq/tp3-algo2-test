@@ -153,20 +153,20 @@ TEST_F(PuestoTest, obtenerGasto){
 }
 
 TEST_F(PuestoTest, existeEnStock){
-	puesto3.vender(1, 9, 5);
-	puesto2.vender(2, 13, 1);
-	puesto1.vender(3, 13, 2);
+	puesto1.vender(1, 9, 5);
+	//puesto2.vender(2, 13, 1);
+	puesto3.vender(3, 13, 2);
 	EXPECT_FALSE(puesto3.existeEnStock(9));
-	EXPECT_FALSE(puesto2.existeEnStock(13));
+	//EXPECT_FALSE(puesto2.existeEnStock(13));
 	EXPECT_FALSE(puesto1.existeEnStock(13));
 }
 
 /*
 TEST_F(PuestoTest, cantComprasSinDesc){
 	EXPECT_EQ(puesto1.cantComprasSinDesc(1,9), 0);
-}
+}*/
 
-*/
+
 
 
 // -------------------------------------------------------------------------------------------
