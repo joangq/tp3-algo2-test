@@ -70,12 +70,14 @@ void Puesto::vender(Persona persona, Producto item, Cantidad cant) {
     _stock[item] = stockItem - cant;
     gastoPersona += precioFinal;
 
-    diccLog<Producto, list<Cantidad>>& compras = comprasPersona.sinDesc;
+    diccLog<Producto, list<Cantidad>>* compras;
 
     if (precioBase != precioFinal)
-        compras = comprasPersona.conDesc;
+        compras = &comprasPersona.conDesc;
+    else
+        compras = &comprasPersona.sinDesc;
 
-    compras[item].push_front(cant);
+    (*compras)[item].push_front(cant);
 }
 
 void Puesto::olvidarItem(Persona persona, Producto item) {
