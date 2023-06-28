@@ -42,31 +42,31 @@ class Lollapatuza {
          * Precondicion: La persona debe ser valida
          * Complejidad: O(log A)
         */
-        Dinero gastoTotalPersona(Persona persona);
+        Dinero gastoTotalPersona(Persona persona) const;
 
         /** PersonaMayorGasto
          * Precondicion: Deben haber personas en el festibal
          * Complejidad: O(1)
         */
-        Persona personaMayorGasto();
+        Persona personaMayorGasto() const;
 
         /** MenorStock
          * Precondicion: El puesto existe y vende el item.
          * Complejidad: O(P log I)
         */
-        IdPuesto menorStock(Producto item);
+        IdPuesto menorStock(Producto item) const;
 
         /** ObtenerPersonas
          * Precondicion: Ninguna
          * Complejidad: O(1)
         */
-        set<Persona> obtenerPersonas();
+        set<Persona>& obtenerPersonas();
 
         /** ObtenerPuestos
          * Precondicion: Ninguna
          * Complejidad: O(1)
         */
-        diccLog<IdPuesto, Puesto> obtenerPuestos();
+        diccLog<IdPuesto, Puesto>& obtenerPuestos();
 
     private:
     struct infoCompras {

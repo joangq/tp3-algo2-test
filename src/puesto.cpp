@@ -35,12 +35,11 @@ Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
     this->_descuentos = descuentos;
 }
 
-Cantidad Puesto::obtenerStock(Producto item) {
+Cantidad Puesto::obtenerStock(Producto item) const {
     return this->_stock.at(item);
 }
 
-// J: Removí unos "else" innecesarios
-Descuento Puesto::obtenerDescuento(Producto item, Cantidad cant) {
+Descuento Puesto::obtenerDescuento(Producto item, Cantidad cant) const {
     if (cant == 0 || _descuentosPorItem.count(item) == 0)
         return 0;
     
@@ -51,10 +50,10 @@ Descuento Puesto::obtenerDescuento(Producto item, Cantidad cant) {
     
     
     int i = busquedaBinaria(cantidades, cant, 0, cantidades.size());
-    return _descuentos[item][cantidades[i]];
+    return _descuentos.at(item).at(cantidades[i]);
 }
 
-Dinero Puesto::obtenerGasto(Persona persona) {
+Dinero Puesto::obtenerGasto(Persona persona) const {
      return this->_gastoPorPersona.at(persona);
 }
 
@@ -90,21 +89,20 @@ void Puesto::olvidarItem(Persona persona, Producto item) {
         comprasItem.pop_front();
 }
 
-bool Puesto::existeEnStock(Producto item) {
+bool Puesto::existeEnStock(Producto item) const {
     return _stock.count(item) == 1;
 }
 
-// J: Cambié "compras" por "diccLog<...>" y "sinDesc" por "d".
-Nat Puesto::cantComprasSinDesc(Persona persona, Producto item) {
-    diccLog<Producto, list<Cantidad>>& d = _comprasPorPersona[persona].sinDesc;
+Nat Puesto::cantComprasSinDesc(Persona persona, Producto item) const {
+    const diccLog<Producto, list<Cantidad>>& d = _comprasPorPersona.at(persona).sinDesc;
 
     if (d.count(item) == 1)
-        return d[item].size();
+        return d.at(item).size();
     
     return 0;
 }
 
-Dinero Puesto::precioConDescuento(Producto item, Cantidad cant) {
+Dinero Puesto::precioConDescuento(Producto item, Cantidad cant) const {
     Descuento descuento = obtenerDescuento(item, cant);
     Dinero precioBase = precioSinDescuento(item, cant);
 
@@ -114,20 +112,18 @@ Dinero Puesto::precioConDescuento(Producto item, Cantidad cant) {
     return (precioBase -  (precioBase / descuento));
 }
 
-Dinero Puesto::precioSinDescuento(Producto item, Cantidad cant) {
+Dinero Puesto::precioSinDescuento(Producto item, Cantidad cant) const {
      return _precios.at(item) * cant;
 }
 
-Menu Puesto::obtenerMenu() {
+Menu& Puesto::obtenerMenu() {
     return this->_precios;
 }
 
-// FIXME: Debería ser una referencia para evitar la copia?
-Stock Puesto::stock() {
+Stock& Puesto::stock() {
     return this->_stock;
 }
 
-// FIXME: Debería ser una referencia para evitar la copia?
-Promociones Puesto::promociones() {
+Promociones& Puesto::promociones() {
     return this->_descuentos;
 }

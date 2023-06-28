@@ -18,7 +18,6 @@ struct TupPuesto {
 class minHeap {
    public:
     minHeap();
-
     minHeap(int n);
 
     void agregar(TupPuesto tup);

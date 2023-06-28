@@ -22,19 +22,19 @@ class Puesto {
          * Precondicion: El item debe existir en el menu.
          * Complejidad: O(log I)
         */
-        Cantidad obtenerStock(Producto item);
+        Cantidad obtenerStock(Producto item) const;
 
         /** ObtenerDescuento
          * Precondicion: El item debe existir en el menu.
          * Complejidad: O(log I + log cant)
         */
-        Descuento obtenerDescuento(Producto item, Cantidad cant);
+        Descuento obtenerDescuento(Producto item, Cantidad cant) const;
 
         /** ObtenerGasto
          * Precondicion: Nada
          * Complejidad: O(log A)
         */
-        Dinero obtenerGasto(Persona persona);
+        Dinero obtenerGasto(Persona persona) const;
 
         /** Vender
          * Precondicion: Debe haber suficiente stock del item.
@@ -52,36 +52,33 @@ class Puesto {
          * Precondicion: Nada
          * Complejidad: O(log I)
         */
-        bool existeEnStock(Producto item);
+        bool existeEnStock(Producto item) const;
 
         /** CantComprasSinDesc
          * Precondicion: La persona debe haber comprado.
          * Complejidad: O(log I)
         */
-        Nat cantComprasSinDesc(Persona persona, Producto item);
+        Nat cantComprasSinDesc(Persona persona, Producto item) const;
 
         /** PrecioConDescuento
          * Precondicion: El item debe existir en el menu. FIXME: Y tener desc?
          * Complejidad: O(log I + log cant)
         */
-        Dinero precioConDescuento(Producto item, Cantidad cant);
+        Dinero precioConDescuento(Producto item, Cantidad cant) const;
 
         /** PrecioSinDescuento
          * Precondicion: El item debe existir en el menu.
          * Complejidad: O(log I)
         */
-        Dinero precioSinDescuento(Producto item, Cantidad cant);
+        Dinero precioSinDescuento(Producto item, Cantidad cant) const;
 
         /** ObtenerMenu
          * Precondicion: Nada
          * Complejidad: O(1)
         */
-        Menu obtenerMenu();
-
-        /** FIXME: Deberiamos tener "obtenerStock" y 
-                  "obtenerPromociones"? */
-        Stock stock();
-        Promociones promociones();
+        Menu& obtenerMenu();
+        Stock& stock();
+        Promociones& promociones();
 
     private:
         /* comprasPorItem */

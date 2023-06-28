@@ -85,16 +85,16 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
 }
 
 
-Dinero Lollapatuza::gastoTotalPersona(Persona persona) {
+Dinero Lollapatuza::gastoTotalPersona(Persona persona) const {
     return this->_infoPersonas.at(persona).gastoTotal;
 }
 
 
-Persona Lollapatuza::personaMayorGasto() {
+Persona Lollapatuza::personaMayorGasto() const {
     return _gastosPersonas.maximo();
 }
 
-IdPuesto Lollapatuza::menorStock(Producto item) {
+IdPuesto Lollapatuza::menorStock(Producto item) const {
     // Utilizo INT32_MAX para que la comparación en el ciclo for
     // valga siempre la primera vez que ocurre.
     int32_t menorStock = INT32_MAX;
@@ -132,11 +132,11 @@ IdPuesto Lollapatuza::menorStock(Producto item) {
     return menorId;
 }
 
-set<Persona> Lollapatuza::obtenerPersonas() {
+set<Persona>& Lollapatuza::obtenerPersonas() {
     return this->_personas;
 }
 
-diccLog<IdPuesto, Puesto> Lollapatuza::obtenerPuestos() {
+diccLog<IdPuesto, Puesto>& Lollapatuza::obtenerPuestos() {
     return this->_puestos;
 }
 
