@@ -61,7 +61,7 @@ Dinero Puesto::obtenerGasto(Persona persona) {
 // J: Cambié "compras" por "diccLog<...>"
 void Puesto::vender(Persona persona, Producto item, Cantidad cant) {
     Cant stockItem = _stock[item];
-    Dinero gastoPersona = _gastoPorPersona[persona];
+    Dinero& gastoPersona = _gastoPorPersona[persona];
 
     Dinero precioBase = precioSinDescuento(item, cant);
     Dinero precioFinal = precioConDescuento(item, cant);
