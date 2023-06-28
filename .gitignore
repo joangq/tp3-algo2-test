@@ -9,3 +9,5 @@ CMakeFiles/*
 .vscode
 .vscode/*
 correrTests
+main.cpp
+main

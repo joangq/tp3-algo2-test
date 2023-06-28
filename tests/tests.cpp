@@ -82,24 +82,33 @@ TEST(testsMaxHeap, Multiples) {
 // FIXME: puesto no tiene un constructor default
 class PuestoTest : public testing::Test {
 protected:
-    Menu menu = {{8, 300}, {9, 811}, {13, 1000}, {15, 127}};
-    set<Persona> personas34, personas67;
-    set<Persona> personas = {3, 4, 6, 7};
-    set<IdPuesto> idsPuestos = {1, 2, 3};
-    
-    Stock stock1 = {{8, 17}, {9, 5}, {13, 27}, {15, 30}};
-    Promociones descuentos1 = {{8, {{3, 10}, {7, 25}}}};
-	Puesto puesto1 = {menu, stock1, descuentos1};
-    
-    Stock stock2 = {{8, 21}, {9, 39}, {13, 11}, {15, 9}};
-    Promociones descuentos2 = {{9, {{4, 12}}}, {15, {{4, 23}}}};
-	Puesto puesto2 = {menu, stock2, descuentos2};
-    
-    Stock stock3 = {{8, 40}, {9, 12}, {13, 2}, {15, 91}};
-    Promociones descuentos3 = {{13, {{7, 19}}}};
-	Puesto puesto3 = {menu, stock3, descuentos3};
+    Menu menu;
+	set<Persona> personas;
+	set<IdPuesto> idsPuestos;
+	Stock stock1, stock2, stock3;
+	Promociones descuentos1, descuentos2, descuentos3;
+	Puesto puesto1, puesto2, puesto3;
+	map<IdPuesto, Puesto> puestos;
 
-    map<IdPuesto, Puesto> puestos = {{1, puesto1}, {2, puesto2}, {3, puesto3}};;
+	void SetUp() {
+		menu = {{8, 300}, {9, 811}, {13, 1000}, {15, 127}};
+		personas = {3, 4, 6, 7};
+		idsPuestos = {1, 2, 3};
+		
+		stock1 = {{8, 17}, {9, 5}, {13, 27}, {15, 30}};
+		descuentos1 = {{8, {{3, 10}, {7, 25}}}};
+		puesto1 = {menu, stock1, descuentos1};
+	
+		stock2 = {{8, 21}, {9, 39}, {13, 11}, {15, 9}};
+		descuentos2 = {{9, {{4, 12}}}, {15, {{4, 23}}}};
+		puesto2 = {menu, stock2, descuentos2};
+	
+		stock3 = {{8, 40}, {9, 12}, {13, 2}, {15, 91}};
+		descuentos3 = {{13, {{7, 19}}}};
+		puesto3 = {menu, stock3, descuentos3};
+
+		puestos = {{1, puesto1}, {2, puesto2}, {3, puesto3}};
+	}
 };
 
 

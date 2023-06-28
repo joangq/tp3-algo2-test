@@ -6,7 +6,7 @@
 #include "auxiliares.h"
 
 Puesto::Puesto() {
-    // TODO
+    
 }
 
 Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
@@ -41,7 +41,7 @@ Cantidad Puesto::obtenerStock(Producto item) {
 
 // J: Removí unos "else" innecesarios
 Descuento Puesto::obtenerDescuento(Producto item, Cantidad cant) {
-    if (cant = 0 || _descuentosPorItem.count(item) == 0)
+    if (cant == 0 || _descuentosPorItem.count(item) == 0)
         return 0;
     
     const vector<Cant>& cantidades = _descuentosPorItem.at(item);
@@ -51,7 +51,7 @@ Descuento Puesto::obtenerDescuento(Producto item, Cantidad cant) {
     
     
     int i = busquedaBinaria(cantidades, cant, 0, cantidades.size());
-    return cantidades[i];
+    return _descuentos[item][cantidades[i]];
 }
 
 Dinero Puesto::obtenerGasto(Persona persona) {
