@@ -13,12 +13,12 @@ Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
     for (auto& tup : descuentos) {
         Item item = tup.first;
-        map<Nat, Nat>& dicc = tup.second;
+        map<Cant, Nat>& dicc = tup.second;
 
         vector<Cant> temp(dicc.size());
 
-        // Itero sobre las tuplas (Cant, Nat)
         int k = 0;
+        // Itero sobre las tuplas (Cant, Nat)
         for (auto& tup : dicc) {
             temp[k] = tup.first;
             ++k;
@@ -84,7 +84,7 @@ void Puesto::olvidarItem(Persona persona, Producto item) {
     list<Cant>& comprasItem = comprasPersonas.sinDesc[item];
     Nat& compra = comprasItem.front();
 
-    compra -= 1; // TODO: compra--? (J)
+    compra -= 1;
 
     if (compra == 0)
         comprasItem.pop_front();

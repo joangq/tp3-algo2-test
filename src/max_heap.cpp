@@ -1,9 +1,7 @@
 #include "max_heap.h"
 #include "heap_aux.h"
 
-maxHeap::maxHeap() {
-    // TODO
-}
+maxHeap::maxHeap() { }
 
 maxHeap::maxHeap(int n, int maxid) : indicesPersona(maxid + 1) {
     this->nodos.reserve(n);
