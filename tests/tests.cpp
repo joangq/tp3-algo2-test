@@ -140,8 +140,8 @@ TEST_F(PuestoTest, obtenerGasto){
 	puesto1.vender(3, 8, 2);
 	EXPECT_EQ(puesto1.obtenerGasto(3), 600);
 	puesto1.vender(3, 8, 3);
-	EXPECT_FALSE(puesto1.obtenerGasto(3) == 1139);
-	EXPECT_EQ(puesto1.obtenerGasto(3), 1140);
+	EXPECT_FALSE(puesto1.obtenerGasto(3) == 1409);
+	EXPECT_EQ(puesto1.obtenerGasto(3), 1410);
 }
 
 // -------------------------------------------------------------------------------------------
