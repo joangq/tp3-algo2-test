@@ -17,7 +17,7 @@ struct Nodo {
 class maxHeap {
    public:
     maxHeap();
-    maxHeap(int n, Nat maxid);
+    maxHeap(Nat n, Nat maxid);
 
     void agregar(Nodo elem);
     Id maximo() const;
@@ -26,9 +26,9 @@ class maxHeap {
     void modificarGasto(Persona persona, Nat nuevoGasto);
 
    private:
-    void hacerMaxHeap(int i);
-    void siftUp(int i);
-    void swap(int i, int j);
+    void hacerMaxHeap(Nat i);
+    void siftUp(Nat i);
+    void swap(Nat i, Nat j);
 
     vector<Nodo> nodos;
     vector<Nat> indicesPersona;

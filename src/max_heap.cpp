@@ -15,7 +15,7 @@ maxHeap::maxHeap() {
     tamActual = 0;
 }
 
-maxHeap::maxHeap(int n, Nat maxid) {
+maxHeap::maxHeap(Nat n, Nat maxid) {
     // Busco la potencia de 2 más cercana a v
     Nat v = n;
 
@@ -43,7 +43,7 @@ void maxHeap::agregar(Nodo elem) {
     Nodo copia_elem = elem;
     copia_elem.id += 1;
 
-    int i = tamActual;
+    Nat i = tamActual;
     nodos[i] = copia_elem;
     indicesPersona[elem.id] = i;
 
@@ -66,7 +66,7 @@ void maxHeap::removerMaximo() {
 
 
 void maxHeap::modificarGasto(Persona persona, Nat nuevoGasto) {
-    int i = indicesPersona[persona];
+    Nat i = indicesPersona[persona];
     Dinero gasto = nodos[i].gasto;
     nodos[i].gasto = nuevoGasto;
 
@@ -77,10 +77,10 @@ void maxHeap::modificarGasto(Persona persona, Nat nuevoGasto) {
 
 }
 
-void maxHeap::hacerMaxHeap(int i) {
-    int izq = Izq(i);
-    int der = Der(i);
-    int mayor = i;
+void maxHeap::hacerMaxHeap(Nat i) {
+    Nat izq = Izq(i);
+    Nat der = Der(i);
+    Nat mayor = i;
 
     Nodo nMayor  = nodos[mayor];
 
@@ -127,10 +127,10 @@ void maxHeap::hacerMaxHeap(int i) {
     }
 }
 
-void maxHeap::swap(int i, int j) {
+void maxHeap::swap(Nat i, Nat j) {
     // Primero, swappeo los indices en el diccionario de índices.
     // Les resto 1 porque las ids guardadas en nodos son 1 más que las reales.
-    int tempIndice = indicesPersona[nodos[i].id - 1];
+    Nat tempIndice = indicesPersona[nodos[i].id - 1];
     indicesPersona[nodos[i].id - 1] = indicesPersona[nodos[j].id - 1];
     indicesPersona[nodos[j].id - 1] = tempIndice;
 
@@ -139,15 +139,15 @@ void maxHeap::swap(int i, int j) {
     nodos[j] = temp;
 }
 
-void maxHeap::siftUp(int i) {
+void maxHeap::siftUp(Nat i) {
     // Sift up.
     while (i != 0 && nodos[i].gasto > nodos[Padre(i)].gasto) {
-        int j = Padre(i);
+        Nat j = Padre(i);
         swap(i, j);
         i = j;
     }
 
-    int j = Padre(i);
+    Nat j = Padre(i);
 
     // Sift up.
     while (i != 0 && nodos[i].gasto == nodos[j].gasto && nodos[i].id < nodos[j].id) {

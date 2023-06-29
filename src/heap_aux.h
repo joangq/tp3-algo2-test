@@ -1,3 +1,5 @@
-int Izq(int n);
-int Der(int n);
-int Padre(int n);
+#include "tipos.h"
+
+Nat Izq(Nat n);
+Nat Der(Nat n);
+Nat Padre(Nat n);

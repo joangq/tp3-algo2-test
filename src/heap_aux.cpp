@@ -1,13 +1,13 @@
 #include "heap_aux.h"
 
-int Izq(int n){
+Nat Izq(Nat n){
     return 2*n + 1;
 }
 
-int Der(int n){
+Nat Der(Nat n){
     return 2*n + 2;
 }
 
-int Padre(int n){
+Nat Padre(Nat n){
     return (n-1)/2;
 }

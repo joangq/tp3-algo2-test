@@ -58,8 +58,8 @@ TEST(testsAuxiliares, merge_sort_ordenados) {
 
 class MaxHeapTest : public testing::Test {
 protected:
-    const int n = 20;
-    const int maxid = 30;
+    const Nat n = 20;
+    const Nat maxid = 30;
     maxHeap h;
 
     void SetUp() {
@@ -98,7 +98,7 @@ TEST_F(MaxHeapTest, ModificarGasto) {
 
 class MinHeapTest : public testing::Test {
 protected:
-    const int n = 20;
+    const Nat n = 20;
     minHeap h;
     Puesto p1, p2, p3;
 
