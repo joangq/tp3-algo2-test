@@ -15,17 +15,15 @@ Puesto::Puesto(const Menu& precios, const Stock& stocks, const Promociones& desc
         Item item = itemDescuentos.first;
         const map<Cant, Nat>& dicc = itemDescuentos.second;
 
-        vector<Cant> temp(dicc.size());
+        vector<Cant> descPorItem(dicc.size());
 
         // Itero sobre las tuplas (Cant, Nat)
         int k = 0;
-        for (auto& infoDescuento : dicc)
-            temp[k++] = infoDescuento.first;
+        for (auto& infoDescuento : dicc) descPorItem[k++] = infoDescuento.first;
 
-        temp = mergeSort(temp);
+        descPorItem = mergeSort(descPorItem);
 
-        // En esta asignación, la copia es implícita.
-        this->_descuentosPorItem[item] = std::move(temp);
+        this->_descuentosPorItem[item] = std::move(descPorItem);
     }
 
     this->_stock = stocks;
@@ -40,14 +38,11 @@ Cantidad Puesto::obtenerStock(const Producto& item) const {
 }
 
 Descuento Puesto::obtenerDescuento(const Producto& item, const Cantidad& cant) const {
-    if (cant == 0 || _descuentosPorItem.count(item) == 0)
-        return 0;
+    if (cant == 0 || _descuentosPorItem.count(item) == 0) return 0;
 
     const vector<Cant>& cantidades = _descuentosPorItem.at(item);
 
-    if (cant < cantidades[0])
-        return 0;
-
+    if (cant < cantidades[0]) return 0;
 
     Nat i = busquedaBinaria(cantidades, cant, 0, cantidades.size());
     return _descuentos.at(item).at(cantidades[i]);
@@ -59,11 +54,11 @@ Dinero Puesto::obtenerGasto(const Persona& persona) const {
 }
 
 void Puesto::vender(const Persona& persona, const Producto& item, const Cantidad& cant) {
-    Cant stockItem = _stock[item];
+    const Cant& stockItem = _stock[item];
     Dinero& gastoPersona = _gastoPorPersona[persona];
 
-    Dinero precioBase = precioSinDescuento(item, cant);
-    Dinero precioFinal = precioConDescuento(item, cant);
+    const Dinero& precioBase = precioSinDescuento(item, cant);
+    const Dinero& precioFinal = precioConDescuento(item, cant);
 
     comprasPorItem& comprasPersona = _comprasPorPersona[persona];
 
