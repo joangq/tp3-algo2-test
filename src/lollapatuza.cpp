@@ -77,7 +77,6 @@ void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, 
                 compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
 
         _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
-        std::printf("%d compró item %d x%d por $%d en %d\n", persona, item, cant, precioConDescuento, pid);
     } catch (std::exception& out_of_range)  {
         cout << "No existe un puesto con esa id." << endl;
         return;
@@ -93,13 +92,14 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
     if (puestoAHackear == nullptr)
         return;
 
+    puestoAHackear->olvidarItem(persona, item);
+    
     Cant cantItem = puestoAHackear->cantComprasSinDesc(persona, item);
 
-    if (cantItem == 1) {
+    if (cantItem == 0) {
         hackeablesItem.removerMinimo();
     }
 
-    puestoAHackear->olvidarItem(persona, item);
 
     int precioItem = puestoAHackear->precioSinDescuento(item, 1);
     compras.gastoTotal -= precioItem;
