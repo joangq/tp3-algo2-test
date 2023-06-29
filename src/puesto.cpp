@@ -122,7 +122,9 @@ Dinero Puesto::precioConDescuento(Producto item, Cantidad cant) const {
     if (descuento == 0)
         return precioBase;
 
-    return (precioBase -  (precioBase / descuento));
+    float calculoDescuento = (float) precioBase * ((float) descuento/100);
+
+    return (int) ((float) precioBase - calculoDescuento);
 }
 
 Dinero Puesto::precioSinDescuento(Producto item, Cantidad cant) const {
