@@ -53,12 +53,9 @@ Descuento Puesto::obtenerDescuento(const Producto& item, const Cantidad& cant) c
     return _descuentos.at(item).at(cantidades[i]);
 }
 
-Dinero Puesto::obtenerGasto(Persona persona) const {
-    if (_gastoPorPersona.count(persona) == 1) {
-        return _gastoPorPersona.at(persona);
-    }
+Dinero Puesto::obtenerGasto(const Persona& persona) const {
+    return _gastoPorPersona.count(persona) != 0 ? _gastoPorPersona.at(persona) : 0;
 
-    return 0;
 }
 
 // J: Cambié "compras" por "diccLog<...>"

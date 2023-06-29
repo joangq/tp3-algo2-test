@@ -34,7 +34,7 @@ class Puesto {
          * Precondicion: Nada
          * Complejidad: O(log A)
         */
-        Dinero obtenerGasto(Persona persona) const;
+        Dinero obtenerGasto(const Persona& persona) const;
 
         /** Vender
          * Precondicion: Debe haber suficiente stock del item.
