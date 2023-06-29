@@ -43,7 +43,8 @@ _personas(personas) {
         dic[item] = minHeap(puestos.size()); // Copia implícita.
 
     for (auto persona : personas) {
-        _gastosPersonas.agregar(Nodo(0, persona));
+        auto nodo = Nodo(0, persona);
+        _gastosPersonas.agregar(nodo);
 
         // En las siguientes asignaciones, la copia es implícita.
         infoCompras compras = infoCompras(0, dic);
