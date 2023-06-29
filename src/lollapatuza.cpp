@@ -64,13 +64,11 @@ void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, 
         (&puesto)->vender(persona, item, cant);
 
         infoCompras &compras = this->_infoPersonas[persona];
-        Nat precioConDescuento = (&puesto)->precioConDescuento(item, cant);
+        const Nat precioConDescuento = (&puesto)->precioConDescuento(item, cant);
         compras.gastoTotal += precioConDescuento;
 
-        // J: Se puede resumir en el mismo if?
-        if (precioConDescuento == puesto.precioSinDescuento(item, cant))
-            if (puesto.cantComprasSinDesc(persona, item) == 1)
-                compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
+        if (precioConDescuento == puesto.precioSinDescuento(item, cant) && puesto.cantComprasSinDesc(persona, item) == 1)
+            compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
 
         _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
     } catch (std::exception &out_of_range) {
@@ -158,21 +156,15 @@ const diccLog<IdPuesto, Puesto> &Lollapatuza::obtenerPuestos() {
 }
 
 Persona Lollapatuza::idMaximo(const set<Persona> &personas) {
-    // Utilizo 0 para que la comparación en el ciclo for
-    // valga siempre la primera vez que ocurre (como mínimo, estos valores son 0).
-    Nat idMax = 0;
-
-    for (auto const &persona: personas) {
-        if (persona > idMax) {
-            idMax = persona;
-        }
-    }
+    Nat idMax = 0; // El id mínimo es 0
+    for (auto const &idPersona: personas)
+        if (idPersona > idMax) idMax = idPersona;
 
     return idMax;
 }
 
-// Funciones no presentes directamente en el TP2, pero utilizadas
-// para el adecuado funcionamiento de fachada_lollapatuza.h
+/* Funciones auxiliares utilizadas para el correcto funcionamiento de fachada_lollapatuza */
+
 Nat Lollapatuza::stockEnPuesto(IdPuesto idPuesto, const Producto &producto) const {
     Cantidad cant;
 
@@ -216,9 +208,8 @@ set<IdPuesto> Lollapatuza::idsDePuestos() const {
     set<IdPuesto> ids;
 
     // Itero sobre las tuplas (IdPuesto, Puesto)
-    for (auto const &tup: _puestos) {
-        ids.emplace(tup.first);
-    }
+    for (auto const &infoPuesto: _puestos)
+        ids.emplace(infoPuesto.first);
 
     return ids;
 }
