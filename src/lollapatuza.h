@@ -14,6 +14,8 @@ using namespace std;
 
 class Lollapatuza {
     public:
+        Lollapatuza();
+
         /** CrearLolla
          * Precondicion: Todos los puestos deben
          * tener el mismo precio para los mismos items,
