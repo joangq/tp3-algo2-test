@@ -65,7 +65,7 @@ Lollapatuza Lollapatuza::operator=(const Lollapatuza& lolla) {
 void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, Cantidad cant) {
     try {
         Puesto& puesto = this->_puestos.at(pid);
-        (&puesto).vender(persona, item, cant);
+        (&puesto)->vender(persona, item, cant);
 
     infoCompras& compras = this->_infoPersonas[persona];
     int precioConDescuento = (&puesto)->precioConDescuento(item, cant);
