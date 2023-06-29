@@ -2,7 +2,6 @@
 #include <list>
 #include <utility>
 #include <vector>
-#include "tipos.h"
 #include "puesto.h"
 #include "auxiliares.h"
 
