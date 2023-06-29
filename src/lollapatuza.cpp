@@ -8,6 +8,10 @@
 
 using namespace std;
 
+Lollapatuza::Lollapatuza() {
+    // TODO
+}
+
 Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables): gastoTotal(gastoTotal), hackeables(hackeables) { };
 
 Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() { };
