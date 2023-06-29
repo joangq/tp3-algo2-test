@@ -56,15 +56,7 @@ Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Per
     this->_puestos = puestos;
 }
 
-// FIXME: Se puede usar el operador= default
-Lollapatuza& Lollapatuza::operator=(const Lollapatuza &lolla) {
-    _personas = lolla._personas;
-    _puestos = lolla._puestos;
-    _infoPersonas = lolla._infoPersonas;
-    _gastosPersonas = lolla._gastosPersonas;
-
-    return *this;
-}
+Lollapatuza& Lollapatuza::operator=(const Lollapatuza &lolla) = default;
 
 void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, Cantidad cant) {
     try {
