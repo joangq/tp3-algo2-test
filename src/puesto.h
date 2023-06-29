@@ -85,6 +85,7 @@ class Puesto {
         struct comprasPorItem {
             diccLog<Producto, list<Cantidad>> conDesc;
             diccLog<Producto, list<Cantidad>> sinDesc;
+            comprasPorItem();
         };
 
         /* estrPuesto */
