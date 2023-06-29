@@ -1,6 +1,7 @@
 #include <map>
 #include <set>
 #include <list>
+#include <utility>
 #include <vector>
 #include <stdexcept>
 #include <iostream>
@@ -11,7 +12,7 @@
 using namespace std;
 
 Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables) : gastoTotal(
-        gastoTotal), hackeables(hackeables) {};
+        gastoTotal), hackeables(std::move(hackeables)) {};
 
 Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() {};
 
@@ -172,7 +173,7 @@ const diccLog<IdPuesto, Puesto> &Lollapatuza::obtenerPuestos() {
 Persona Lollapatuza::idMaximo(const set<Persona> &personas) {
     // Utilizo 0 para que la comparación en el ciclo for
     // valga siempre la primera vez que ocurre (como mínimo, estos valores son 0).
-    int idMax = 0;
+    Nat idMax = 0;
 
     for (auto const &persona: personas) {
         if (persona > idMax) {
