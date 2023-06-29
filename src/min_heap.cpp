@@ -26,7 +26,7 @@ minHeap::minHeap(int n) {
     v++;
 
     for (int i = 0; i < v; i++)
-        nodos.push_back(TupPuesto(0, nullptr));
+        nodos.emplace_back(0, nullptr);
 
     tamActual = 0;
 }
