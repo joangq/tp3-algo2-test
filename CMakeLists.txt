@@ -11,7 +11,7 @@ add_library(gtest STATIC tests/gtest-1.8.1/gtest-all.cc)
 add_library(gtest_main STATIC tests/gtest-1.8.1/gtest_main.cc)
 
 # Leemos todos los archivos fuentes en ./src
-file(GLOB SOURCE_FILES src/*.cpp src/*.h src/*.hpp)
+file(GLOB SOURCE_FILES src/heap/*.cpp src/heap/*.h src/*.cpp src/*.h src/*.hpp)
 
 # Leemos todos los archivos de test en ./tests
 file(GLOB TEST_SOURCES tests/*.cpp)

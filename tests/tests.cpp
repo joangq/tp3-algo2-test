@@ -1,8 +1,6 @@
 #include "gtest-1.8.1/gtest.h"
 #include "../src/auxiliares.h"
-#include "../src/max_heap.h"
-#include "../src/min_heap.h"
-#include "../src/heap_aux.h"
+#include "../src/heap/heap.h"
 #include "../src/lollapatuza.h"
 
 TEST(testsAuxiliares, binary_search_tipico) {

@@ -1,45 +1,25 @@
 #include "max_heap.h"
-#include "heap_aux.h"
+#include "heap.h"
 
-Nodo::Nodo() {
-    gasto = 0;
-    id = 0;
-}
+Nodo::Nodo() : gasto(0), id(0) {}
 
-Nodo::Nodo(Nat gasto, Id id) {
-    this->gasto = gasto;
-    this->id = id;
-}
+Nodo::Nodo(Nat gasto, Id id) : gasto(gasto), id(id) {}
 
-maxHeap::maxHeap() {
-    tamActual = 0;
-}
+maxHeap::maxHeap() : tamActual(0) {}
 
-maxHeap::maxHeap(Nat n, Nat maxid) {
-    // Busco la potencia de 2 más cercana a v
-    Nat v = n;
+maxHeap::maxHeap(Nat n, Nat maxid) : tamActual(0) {
+    Nat size = heap::potenciaDeDos(n);
 
-    v--;
-    v |= v >> 1;
-    v |= v >> 2;
-    v |= v >> 4;
-    v |= v >> 8;
-    v |= v >> 16;
-    v++;
-
-
-    for (int i = 0; i < v; i++)
+    for (int i = 0; i < size; i++)
         nodos.emplace_back(0, 1);
 
     for (int i = 0; i < maxid + 1; i++)
         indicesPersona.push_back(0);
-
-    tamActual = 0;
 }
 
 void maxHeap::agregar(Nodo elem) {
-    // Creo una copia y le sumo 1 al id para poder representar a personas
-    // con id = 0. Ver TP2 para una aclaración más precisa.
+    /* Creo una copia y le sumo 1 al id para poder representar a personas
+       con id = 0. Ver TP2 para una aclaración más precisa. */
     Nodo copia_elem = elem;
     copia_elem.id += 1;
 
@@ -78,8 +58,8 @@ void maxHeap::modificarGasto(Persona persona, Nat nuevoGasto) {
 }
 
 void maxHeap::hacerMaxHeap(Nat i) {
-    Nat izq = Izq(i);
-    Nat der = Der(i);
+    Nat izq = heap::Izq(i);
+    Nat der = heap::Der(i);
     Nat mayor = i;
 
     Nodo nMayor  = nodos[mayor];
@@ -141,17 +121,17 @@ void maxHeap::swap(Nat i, Nat j) {
 
 void maxHeap::siftUp(Nat i) {
     // Sift up.
-    while (i != 0 && nodos[i].gasto > nodos[Padre(i)].gasto) {
-        Nat j = Padre(i);
+    while (i != 0 && nodos[i].gasto > nodos[heap::Padre(i)].gasto) {
+        Nat j = heap::Padre(i);
         swap(i, j);
         i = j;
     }
 
-    Nat j = Padre(i);
+    Nat j = heap::Padre(i);
 
     // Sift up.
     while (i != 0 && nodos[i].gasto == nodos[j].gasto && nodos[i].id < nodos[j].id) {
-        j = Padre(i);
+        j = heap::Padre(i);
         swap(i, j);
         i = j;
     }

@@ -3,9 +3,9 @@
 
 #include <vector>
 
-#include "heap_aux.h"
-#include "puesto.h"
-#include "tipos.h"
+#include "heap.h"
+#include "../puesto.h"
+#include "../tipos.h"
 
 struct TupPuesto {
     Nat id;

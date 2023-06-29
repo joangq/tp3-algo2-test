@@ -6,9 +6,7 @@
 #include <vector>
 #include "tipos.h"
 #include "puesto.h"
-#include "../src/max_heap.h"
-#include "../src/min_heap.h"
-#include "../src/heap_aux.h"
+#include "heap/heap.h"
 
 using namespace std;
 

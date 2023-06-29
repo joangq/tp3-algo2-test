@@ -6,21 +6,11 @@ TupPuesto::TupPuesto(): id(0), puesto(nullptr) {}
 
 minHeap::minHeap(): tamActual(0) {}
 
-minHeap::minHeap(Nat n) {
-    unsigned int v = n;
+minHeap::minHeap(Nat n) : tamActual(0) {
+    Nat size = heap::potenciaDeDos(n);
 
-    v--;
-    v |= v >> 1;
-    v |= v >> 2;
-    v |= v >> 4;
-    v |= v >> 8;
-    v |= v >> 16;
-    v++;
-
-    for (int i = 0; i < v; i++)
+    for (int i = 0; i < size; i++)
         nodos.emplace_back(0, nullptr);
-
-    tamActual = 0;
 }
 
 void minHeap::agregar(TupPuesto tup) {
@@ -29,8 +19,8 @@ void minHeap::agregar(TupPuesto tup) {
     tamActual++;
 
     // Sift up.
-    while (i != 0 and nodos[i].id < nodos[Padre(i)].id) {
-        Nat j = Padre(i);
+    while (i != 0 and nodos[i].id < nodos[heap::Padre(i)].id) {
+        Nat j = heap::Padre(i);
         swap(i, j);
         i = j;
     }
@@ -50,9 +40,9 @@ void minHeap::removerMinimo() {
 }
 
 void minHeap::hacerMinHeap(Nat i) {
-    Nat izq = Izq(i);
+    Nat izq = heap::Izq(i);
     Nat menor = i;
-    Nat der = Der(i);
+    Nat der = heap::Der(i);
 
     if (izq < tamActual and nodos[izq].id < nodos[menor].id)
         menor = izq;

@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "heap_aux.h"
-#include "tipos.h"
+#include "heap.h"
+#include "../tipos.h"
 
 struct Nodo {
     Nat gasto;
