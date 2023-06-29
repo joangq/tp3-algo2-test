@@ -88,6 +88,7 @@ TEST_F(LollaTest, arrancar_lolla) {
 }
 
 TEST_F(LollaTest, vender_sin_descuento) {
+    // Invalid write
     FachadaLollapatuza l(personas, puestos);
     l.registrarCompra(4, 5, 7, 6);
 
