@@ -174,7 +174,7 @@ class LollapatuzaTest : public testing::Test{
 };
 
 TEST_F(LollapatuzaTest, SaberPersonas){
-	set<Persona> persDeLolla = *lolla.obtenerPersonas(); 
+	set<Persona> persDeLolla = lolla.obtenerPersonas(); 
 	EXPECT_EQ(persDeLolla, personas);
 }
 
