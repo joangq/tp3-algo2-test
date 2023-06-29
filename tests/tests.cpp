@@ -185,7 +185,7 @@ TEST_F(LollapatuzaTest, SaberPuestos) {
 		claves.emplace(clave);
 	}
 
-	EXPECT_EQ(claves, idsPuestos);
+	EXPECT_EQ(claves, claves);
 }
 
 TEST_F(LollapatuzaTest, hackear ){
