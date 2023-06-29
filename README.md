@@ -55,16 +55,16 @@ Tengo pendiente agregar una configuración para Valgrind, pero por ahora me inte
 
 - [x] Pasar el pseudocódigo a C++
 - [ ] Escribir tests para cada componente.
-  - [ ] maxHeap
-  - [ ] minHeap
+  - [x] maxHeap
+  - [x] minHeap
   - [ ] Puesto
   - [ ] Lollapatuza
-- [ ] Pasar los tests personales y que cada componente no leakee.
-  - [ ] maxHeap
-  - [ ] minHeap
-  - [ ] Puesto
-  - [ ] Lollapatuza
-- [ ] Pasar todos los tests de la cátedra sin que leakee.
+- [x] Pasar los tests personales y que cada componente no leakee.
+  - [x] maxHeap
+  - [x] minHeap
+  - [x] Puesto
+  - [x] Lollapatuza
+- [x] Pasar todos los tests de la cátedra sin que leakee.
 - [ ] Encapsular y limpiar el código.
   - [ ] maxHeap
   - [ ] minHeap
