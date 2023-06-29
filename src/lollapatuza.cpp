@@ -21,17 +21,14 @@ Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Per
     set<Producto> totalItems = set<Producto>();
 
     // Itero sobre las tuplas de (IdPuesto, Puesto).
-    for (auto const &tup: puestos) {
+    for (auto const &itPuestos: puestos) {
         // Utilizo referencias para evitar copiar la estructura.
-        Puesto puesto = tup.second;
+        Puesto puesto = itPuestos.second;
         const Stock &stock = puesto.stock();
 
         // Itero sobre las tuplas de (Item, Cant).
-        for (auto const &itemTup: stock) {
-            Producto item = itemTup.first;
-            // std::set no inserta el elemento si ya está en el conjunto.
-            totalItems.emplace(item);
-        }
+        for (auto const &itItemsCant: stock)
+            totalItems.emplace(itItemsCant.first); // std::set no inserta el elemento si ya está en el conjunto.
     }
 
     map<Nat, minHeap> dic = map<Nat, minHeap>();
