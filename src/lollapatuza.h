@@ -72,8 +72,8 @@ class Lollapatuza {
         */
         const diccLog<IdPuesto, Puesto>& obtenerPuestos();
 
-    // Funciones no presentes directamente en el TP2, pero utilizadas
-    // para el adecuado funcionamiento de fachada_lollapatuza.h
+    /* Funciones no presentes directamente en el TP2, pero utilizadas
+       para el adecuado funcionamiento de fachada_lollapatuza.h */
     Nat stockEnPuesto(IdPuesto idPuesto, const Producto& producto) const;
     Nat descuentoEnPuesto(IdPuesto idPuesto, const Producto& producto, Nat cantidad) const;
     Nat gastoEnPuesto(IdPuesto idPuesto, Persona persona) const;
@@ -92,7 +92,7 @@ class Lollapatuza {
          * Complejidad: O(A)
          * Descripcion: Devuelve el ID maximo de todas las personas.
         */
-        Persona idMaximo(const set<Persona>& p);
+        static Persona idMaximo(const set<Persona>& p);
 
         /* estrLolla */
         diccLog<IdPuesto, Puesto> _puestos;

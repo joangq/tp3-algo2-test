@@ -10,12 +10,14 @@
 
 using namespace std;
 
-Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables) : gastoTotal(
-        gastoTotal), hackeables(std::move(hackeables)) {}
+Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables)
+    : gastoTotal(gastoTotal), hackeables(std::move(hackeables)) {}
 
-Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() {}
+Lollapatuza::infoCompras::infoCompras()
+    : gastoTotal(0), hackeables() {}
 
-Lollapatuza::Lollapatuza() : _puestos(), _infoPersonas(), _gastosPersonas(), _personas() {}
+Lollapatuza::Lollapatuza()
+    : _puestos(), _infoPersonas(), _gastosPersonas(), _personas() {}
 
 Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Persona> &personas) {
     _gastosPersonas = maxHeap(puestos.size(), idMaximo(personas));
