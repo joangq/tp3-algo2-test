@@ -127,31 +127,24 @@ IdPuesto Lollapatuza::menorStock(Producto item) const {
     Cant stockItem;
 
     // Itero sobre las tuplas (IdPuesto, Puesto)
-    for (auto const &tup: _puestos) {
-        IdPuesto pid = tup.first;
-        Puesto puesto = tup.second;
+    for (auto const &infoPuesto: _puestos) {
+        const IdPuesto pid = infoPuesto.first;
+        const Puesto puesto = infoPuesto.second;
 
-        if (puesto.existeEnStock(item)) {
-            stockItem = puesto.obtenerStock(item);
+        if (!puesto.existeEnStock(item)) continue; // Si el puesto no tiene el item, no hago nada.
 
-            if (menorStock == -1) {
-                // Casteo a int para que funcione el checkeo con "-1"
-                menorStock = (int) stockItem;
-                menorId = (int) pid;
-            }
+        stockItem = puesto.obtenerStock(item);
 
-            if (stockItem <= menorStock) {
-                // Si son iguales, únicamente cambio el menorId si
-                // el pid nuevo es menor al actual.
-                if (stockItem == menorStock) {
-                    if (pid < menorId)
-                        menorId = (int) pid;
-                } else {
-                    menorId = (int) pid;
-                }
-                menorStock = (int) stockItem;
-            }
+        if (menorStock == -1) {
+            menorStock = (int) stockItem;
+            menorId = (int) pid;
         }
+
+        if (stockItem > menorStock) continue; // Si el stock es mayor, no hago nada.
+
+        // Únicamente cambio el menorId si el pid nuevo es menor al actual.
+        if (stockItem != menorStock || pid < menorId) menorId = (int) pid;
+        menorStock = (int) stockItem;
     }
 
     return menorId;
