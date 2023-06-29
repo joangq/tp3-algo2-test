@@ -1,13 +1,30 @@
 #include "max_heap.h"
 #include "heap_aux.h"
 
-maxHeap::maxHeap() { }
+Nodo::Nodo() { 
+    gasto = 0;
+    id = 0;
+}
 
-maxHeap::maxHeap(int n, int maxid) : indicesPersona(maxid + 1) {
-    this->nodos.reserve(n);
+Nodo::Nodo(Nat gasto, Id id) {
+        this->gasto = gasto;
+        this->id = id;
+    }
+
+maxHeap::maxHeap() { 
     tamActual = 0;
 }
 
+maxHeap::maxHeap(int n, int maxid) {
+    indicesPersona.resize(maxid + 1);
+    indicesPersona.reserve(maxid + 1);
+
+    nodos.resize(n);
+    nodos.reserve(n);
+    
+
+    tamActual = 0;
+}
 
 void maxHeap::agregar(Nodo elem) { 
     // Creo una copia y le sumo 1 al id para poder representar a personas
@@ -54,8 +71,6 @@ void maxHeap::hacerMaxHeap(int i) {
     int der = Der(i);
     int mayor = i;
 
-    Nodo nIzq = nodos[izq];
-    Nodo nDer = nodos[der];
     Nodo nMayor  = nodos[mayor];
 
     /*
@@ -71,22 +86,27 @@ void maxHeap::hacerMaxHeap(int i) {
         Si no son iguales, como vale mayor o igual, entonces va a ser mayor, por lo que directamente intercambio.
     */
 
-    if (izq < tamActual && nIzq.gasto >= nMayor.gasto) {
-        if (nIzq.gasto == nMayor.gasto) {
-            if (nMayor.id > nIzq.id)
+    if (izq < tamActual) {
+        Nodo nIzq = nodos[izq];
+        if (nIzq.gasto >= nMayor.gasto) {
+            if (nIzq.gasto == nMayor.gasto) {
+                    if (nMayor.id > nIzq.id)
+                        mayor = izq;
+            } else {
                 mayor = izq;
-        } else {
-            mayor = izq;
+            }
         }
-        
     }
 
-    if (der < tamActual && nDer.gasto >= nMayor.gasto) {
-        if (nDer.gasto == nMayor.gasto) {
-            if (nMayor.id > nDer.id)
+    if (der < tamActual) {
+        Nodo nDer = nodos[der];
+        if (nDer.gasto >= nMayor.gasto) {
+            if (nDer.gasto == nMayor.gasto) {
+                if (nMayor.id > nDer.id)
+                    mayor = der;
+            } else {
                 mayor = der;
-        } else {
-            mayor = der;
+            }
         }
     }
 

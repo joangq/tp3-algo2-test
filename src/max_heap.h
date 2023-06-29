@@ -10,10 +10,8 @@ struct Nodo {
     Nat gasto;
     Id id;
 
-    Nodo(Nat gasto, Id id) {
-        this->gasto = gasto;
-        this->id = id;
-    }
+    Nodo();
+    Nodo(Nat gasto, Id id);
 };
 
 class maxHeap {
