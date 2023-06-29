@@ -16,7 +16,7 @@ class Puesto {
          * claves. Las claves de descuentos estan contenidas en ellas.
          * Complejidad: O(I * (cant*log(cant) + log I))
         */
-        Puesto(Menu precios, Stock stocks, Promociones descuentos);
+        Puesto(Menu precios, Stock stocks, const Promociones& descuentos);
 
         /** ObtenerStock
          * Precondicion: El item debe existir en el menu.

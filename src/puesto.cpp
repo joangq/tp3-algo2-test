@@ -1,5 +1,6 @@
 #include <map>
 #include <list>
+#include <utility>
 #include <vector>
 #include "tipos.h"
 #include "puesto.h"
@@ -9,11 +10,11 @@ Puesto::Puesto() {}
 
 Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc() {};
 
-Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
+Puesto::Puesto(Menu precios, Stock stocks, const Promociones& descuentos) {
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
     for (auto& tup : descuentos) {
         Item item = tup.first;
-        map<Cant, Nat>& dicc = tup.second;
+        const map<Cant, Nat>& dicc = tup.second;
 
         vector<Cant> temp(dicc.size());
 
@@ -30,8 +31,8 @@ Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
         this->_descuentosPorItem[item] = temp;
     }
 
-    this->_stock = stocks;
-    this->_precios = precios;
+    this->_stock = std::move(stocks);
+    this->_precios = std::move(precios);
     this->_descuentos = descuentos;
 
 
@@ -51,7 +52,7 @@ Descuento Puesto::obtenerDescuento(Producto item, Cantidad cant) const {
         return 0;
 
 
-    int i = busquedaBinaria(cantidades, cant, 0, cantidades.size());
+    Nat i = busquedaBinaria(cantidades, cant, 0, cantidades.size());
     return _descuentos.at(item).at(cantidades[i]);
 }
 
@@ -124,7 +125,7 @@ Dinero Puesto::precioConDescuento(Producto item, Cantidad cant) const {
     if (descuento == 0)
         return precioBase;
 
-    float calculoDescuento = (float) precioBase * ((float) descuento/100);
+    float calculoDescuento = (float) precioBase * ((float) descuento / 100);
 
     return (int) ((float) precioBase - calculoDescuento);
 }
