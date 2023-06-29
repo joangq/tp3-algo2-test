@@ -157,7 +157,7 @@ class LollapatuzaTest : public testing::Test{
 		// FIXME: Algo de acá está inicializándose mal
         menu = {{3, 500}, {4, 1000}, {5, 2500}, {7, 2000}};
         personas = {2, 4, 8, 9};
-		
+
         descuentos7 = {{3, {{5, 30}}}, {7, {{2, 10}}}};
         stock7 = {{3, 20}, {4, 20}, {5, 20}, {7, 20}};
         puesto7 = {menu, stock7, descuentos7};
@@ -171,7 +171,7 @@ class LollapatuzaTest : public testing::Test{
         puesto2 = {menu, stock2, descuentos2};
         puestos = {{2, puesto2}, {6, puesto6}, {7, puesto7}};
 
-		//lolla = Lollapatuza(puestos, personas);
+		lolla = Lollapatuza(puestos, personas);
     }
 
 };
