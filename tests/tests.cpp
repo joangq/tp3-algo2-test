@@ -144,6 +144,7 @@ TEST_F(MinHeapTest, RemoverMinimo) {
 
 class LollapatuzaTest : public testing::Test{
 	protected:
+	Lollapatuza lolla;
 	Menu menu;
     set<Persona> personas, personas89, personas49;
     set<IdPuesto> idsPuestos;
@@ -168,12 +169,24 @@ class LollapatuzaTest : public testing::Test{
         puesto6 = {stock6, descuentos6, menu};
         puesto7 = {stock7, descuentos7, menu};
         puestos = {{2, puesto2}, {6, puesto6}, {7, puesto7}};
+		lolla= {idsPuestos, personas};
     }
 
 }
 
+TEST_F(LollapatuzaTest, SaberPersonas){
+	set<Persona> persDeLolla = *lolla.obtenerPersonas(); 
+	EXPECT_EQ(persDeLolla, personas);
+}
 
+TEST_T(LollapatuzaTest, SaberPuestos){
+	//test para preguntarle los puestos al lolla
+}
 
+TEST_F(LollapatuzaTest, hackear ){
+	//test que analice en hackeo
+
+}
 // -------------------------------------------------------------------------------------------
 // FIXME: puesto no tiene un constructor default
 class PuestoTest : public testing::Test {
