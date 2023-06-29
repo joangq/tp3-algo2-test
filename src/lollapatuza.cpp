@@ -53,6 +53,8 @@ Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Per
 Lollapatuza Lollapatuza::operator=(const Lollapatuza& lolla) {
     _personas = lolla._personas;
     _puestos = lolla._puestos;
+    _infoPersonas = lolla._infoPersonas;
+    _gastosPersonas = lolla._gastosPersonas;
 
     return *this;
 }
@@ -115,9 +117,10 @@ IdPuesto Lollapatuza::menorStock(Producto item) const {
         if (puesto.existeEnStock(item)) {
             stockItem = puesto.obtenerStock(item);
 
-            if (menorStock == -1)
+            if (menorStock == -1) {
                 menorStock = stockItem;
                 menorId = pid;
+            }
 
             if (stockItem <= menorStock) {
                 // Si son iguales, únicamente cambio el menorId si

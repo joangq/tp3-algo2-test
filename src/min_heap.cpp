@@ -15,8 +15,9 @@ minHeap::minHeap() {
 }
 
 minHeap::minHeap(int n) {
-    nodos.resize(n);
-    nodos.reserve(n);
+    for (int i = 0; i < n; i++)
+        nodos.push_back(TupPuesto(0, nullptr));
+
     tamActual = 0;
 }
 

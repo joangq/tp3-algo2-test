@@ -20,7 +20,7 @@ maxHeap::maxHeap(int n, int maxid) {
         nodos.push_back(Nodo(0, 0));
 
     for (int i = 0; i < maxid + 1; i++)
-            indicesPersona.push_back(0);        
+        indicesPersona.push_back(0);        
     
     tamActual = 0;
 }
