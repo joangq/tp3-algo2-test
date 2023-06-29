@@ -54,6 +54,7 @@ Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Per
     this->_puestos = puestos;
 }
 
+// FIXME: Se puede usar el operador= default
 Lollapatuza& Lollapatuza::operator=(const Lollapatuza &lolla) {
     _personas = lolla._personas;
     _puestos = lolla._puestos;
@@ -69,7 +70,7 @@ void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, 
         (&puesto)->vender(persona, item, cant);
 
         infoCompras &compras = this->_infoPersonas[persona];
-        int precioConDescuento = (&puesto)->precioConDescuento(item, cant);
+        Nat precioConDescuento = (&puesto)->precioConDescuento(item, cant);
         compras.gastoTotal += precioConDescuento;
 
         // J: Se puede resumir en el mismo if?
@@ -102,7 +103,7 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
     }
 
 
-    int precioItem = puestoAHackear->precioSinDescuento(item, 1);
+    Nat precioItem = puestoAHackear->precioSinDescuento(item, 1);
     compras.gastoTotal -= precioItem;
 
     _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
@@ -113,7 +114,7 @@ Dinero Lollapatuza::gastoTotalPersona(Persona persona) const {
     Dinero gastoTotal;
     try {
         gastoTotal = _infoPersonas.at(persona).gastoTotal;
-    } catch (out_of_range) {
+    } catch (std::exception& out_of_range) {
         cout << "No existe esta persona en el festival." << endl;
         return 0;
     }
@@ -140,8 +141,9 @@ IdPuesto Lollapatuza::menorStock(Producto item) const {
             stockItem = puesto.obtenerStock(item);
 
             if (menorStock == -1) {
-                menorStock = stockItem;
-                menorId = pid;
+                // Casteo a int para que funcione el checkeo con "-1"
+                menorStock = (int) stockItem;
+                menorId = (int) pid;
             }
 
             if (stockItem <= menorStock) {
@@ -149,11 +151,11 @@ IdPuesto Lollapatuza::menorStock(Producto item) const {
                 // el pid nuevo es menor al actual.
                 if (stockItem == menorStock) {
                     if (pid < menorId)
-                        menorId = pid;
+                        menorId = (int) pid;
                 } else {
-                    menorId = pid;
+                    menorId = (int) pid;
                 }
-                menorStock = stockItem;
+                menorStock = (int) stockItem;
             }
         }
     }
@@ -203,7 +205,7 @@ Nat Lollapatuza::descuentoEnPuesto(IdPuesto idPuesto, const Producto &producto, 
 
     try {
         desc = _puestos.at(idPuesto).obtenerDescuento(producto, cantidad);
-    } catch (out_of_range) {
+    } catch (std::exception& out_of_range) {
         cout << "No existe un puesto con esa id en el festival." << endl;
         return 0;
     }
@@ -216,7 +218,7 @@ Nat Lollapatuza::gastoEnPuesto(IdPuesto idPuesto, Persona persona) const {
 
     try {
         gasto = _puestos.at(idPuesto).obtenerGasto(persona);
-    } catch (out_of_range) {
+    } catch (std::exception& out_of_range) {
         cout << "No existe un puesto con esa id en el festival." << endl;
         return 0;
     }
