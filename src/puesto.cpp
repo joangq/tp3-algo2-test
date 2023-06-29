@@ -39,7 +39,7 @@ Cantidad Puesto::obtenerStock(const Producto& item) const {
     return this->_stock.at(item);
 }
 
-Descuento Puesto::obtenerDescuento(Producto item, Cantidad cant) const {
+Descuento Puesto::obtenerDescuento(const Producto& item, const Cantidad& cant) const {
     if (cant == 0 || _descuentosPorItem.count(item) == 0)
         return 0;
 

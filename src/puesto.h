@@ -28,7 +28,7 @@ class Puesto {
          * Precondicion: El item debe existir en el menu.
          * Complejidad: O(log I + log cant)
         */
-        Descuento obtenerDescuento(Producto item, Cantidad cant) const;
+        Descuento obtenerDescuento(const Producto& item, const Cantidad& cant) const;
 
         /** ObtenerGasto
          * Precondicion: Nada
