@@ -5,12 +5,9 @@
 #include "puesto.h"
 #include "auxiliares.h"
 
-Puesto::Puesto() {
-    
-}
+Puesto::Puesto() {}
 
-Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc(){
-}
+Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc(){}
 
 Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
@@ -36,7 +33,7 @@ Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
     this->_stock = stocks;
     this->_precios = precios;
     this->_descuentos = descuentos;
-    this->comprasPorItem = comprasPorItem();
+    // this->comprasPorItem = comprasPorItem();
 
 }
 
