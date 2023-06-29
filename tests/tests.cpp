@@ -180,7 +180,7 @@ TEST_F(LollapatuzaTest, SaberPersonas){
 
 TEST_T(LollapatuzaTest, SaberPuestos){
 	diccLog<IdPuesto, Puesto> puestosDeLolla = *lolla.obtenerPuestos();
-	set<idPuesto> claves= <>;
+	set<idPuesto> claves = {};
 	for(IdPuesto clave: puestosDeLolla){
 		claves.pushBack(clave);
 	}
