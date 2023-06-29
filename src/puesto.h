@@ -40,37 +40,37 @@ class Puesto {
          * Precondicion: Debe haber suficiente stock del item.
          * Complejidad: O(log I + log A + log cant)
         */
-        void vender(Persona persona, Producto item, Cantidad cant);
+        void vender(const Persona& persona, const Producto& item, const Cantidad& cant);
 
         /** OlvidarItem
          * Precondicion: El item debe existir y haber sido consumido sin promo.
          * Complejidad: O(log I + log A)
         */
-        void olvidarItem(Persona persona, Producto item);
+        void olvidarItem(const Persona& persona, const Producto& item);
 
         /** ExisteEnStock?
          * Precondicion: Nada
          * Complejidad: O(log I)
         */
-        bool existeEnStock(Producto item) const;
+        bool existeEnStock(const Producto& item) const;
 
         /** CantComprasSinDesc
          * Precondicion: La persona debe haber comprado.
          * Complejidad: O(log I)
         */
-        Nat cantComprasSinDesc(Persona persona, Producto item) const;
+        Nat cantComprasSinDesc(const Persona& persona, const Producto& item) const;
 
         /** PrecioConDescuento
-         * Precondicion: El item debe existir en el menu. FIXME: Y tener desc?
+         * Precondicion: El item debe existir en el menu.
          * Complejidad: O(log I + log cant)
         */
-        Dinero precioConDescuento(Producto item, Cantidad cant) const;
+        Dinero precioConDescuento(const Producto& item, const Cantidad& cant) const;
 
         /** PrecioSinDescuento
          * Precondicion: El item debe existir en el menu.
          * Complejidad: O(log I)
         */
-        Dinero precioSinDescuento(Producto item, Cantidad cant) const;
+        Dinero precioSinDescuento(const Producto& item, const Cantidad& cant) const;
 
         /** ObtenerMenu
          * Precondicion: Nada

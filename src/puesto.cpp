@@ -58,8 +58,7 @@ Dinero Puesto::obtenerGasto(const Persona& persona) const {
 
 }
 
-// J: Cambié "compras" por "diccLog<...>"
-void Puesto::vender(Persona persona, Producto item, Cantidad cant) {
+void Puesto::vender(const Persona& persona, const Producto& item, const Cantidad& cant) {
     Cant stockItem = _stock[item];
     Dinero& gastoPersona = _gastoPorPersona[persona];
 
@@ -68,22 +67,17 @@ void Puesto::vender(Persona persona, Producto item, Cantidad cant) {
 
     comprasPorItem& comprasPersona = _comprasPorPersona[persona];
 
-    // Accede al item y no al indice del item
-
     _stock[item] = stockItem - cant;
     gastoPersona += precioFinal;
 
-    diccLog<Producto, list<Cantidad>>* compras;
-
-    if (precioBase != precioFinal)
-        compras = &comprasPersona.conDesc;
-    else
-        compras = &comprasPersona.sinDesc;
+    diccLog<Producto, list<Cantidad>>* compras = &(precioBase != precioFinal
+                                               ? comprasPersona.conDesc
+                                               : comprasPersona.sinDesc);
 
     (*compras)[item].push_front(cant);
 }
 
-void Puesto::olvidarItem(Persona persona, Producto item) {
+void Puesto::olvidarItem(const Persona& persona, const Producto& item) {
     comprasPorItem& comprasPersonas = _comprasPorPersona[persona];
     list<Cant>& comprasItem = comprasPersonas.sinDesc[item];
     Nat& compra = comprasItem.front();
@@ -98,21 +92,22 @@ void Puesto::olvidarItem(Persona persona, Producto item) {
     _gastoPorPersona[persona] -= precioSinDescuento(item, 1);
 }
 
-bool Puesto::existeEnStock(Producto item) const {
+bool Puesto::existeEnStock(const Producto& item) const {
     return _stock.count(item) == 1;
 }
 
-Nat Puesto::cantComprasSinDesc(Persona persona, Producto item) const {
-    if (_comprasPorPersona.count(persona) == 1) {
-        const diccLog<Producto, list<Cantidad>>& d = _comprasPorPersona.at(persona).sinDesc;
-        if (d.count(item) == 1)
-            return d.at(item).size();
-    }
+Nat Puesto::cantComprasSinDesc(const Persona& persona, const Producto& item) const {
+    if (_comprasPorPersona.count(persona) != 1) return 0;
+
+    const diccLog<Producto, list<Cantidad>>& d = _comprasPorPersona.at(persona).sinDesc;
+
+    if (d.count(item) == 1)
+        return d.at(item).size();
 
     return 0;
 }
 
-Dinero Puesto::precioConDescuento(Producto item, Cantidad cant) const {
+Dinero Puesto::precioConDescuento(const Producto& item, const Cantidad& cant) const {
     Descuento descuento = obtenerDescuento(item, cant);
     Dinero precioBase = precioSinDescuento(item, cant);
 
@@ -124,7 +119,7 @@ Dinero Puesto::precioConDescuento(Producto item, Cantidad cant) const {
     return (int) ((float) precioBase - calculoDescuento);
 }
 
-Dinero Puesto::precioSinDescuento(Producto item, Cantidad cant) const {
+Dinero Puesto::precioSinDescuento(const Producto& item, const Cantidad& cant) const {
     return _precios.at(item) * cant;
 }
 
