@@ -26,7 +26,7 @@ class Lollapatuza {
         Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Persona>& personas);
         
         // Operador de asignación
-        Lollapatuza operator=(const Lollapatuza& lolla);
+        Lollapatuza& operator=(const Lollapatuza& lolla);
 
         /** RegistrarCompra
          * Precondicion: La persona y el puesto deben ser

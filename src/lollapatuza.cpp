@@ -2,7 +2,6 @@
 #include <set>
 #include <list>
 #include <utility>
-#include <vector>
 #include <stdexcept>
 #include <iostream>
 #include "tipos.h"
@@ -12,11 +11,11 @@
 using namespace std;
 
 Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables) : gastoTotal(
-        gastoTotal), hackeables(std::move(hackeables)) {};
+        gastoTotal), hackeables(std::move(hackeables)) {}
 
-Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() {};
+Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() {}
 
-Lollapatuza::Lollapatuza() : _puestos(), _infoPersonas(), _gastosPersonas(), _personas() {};
+Lollapatuza::Lollapatuza() : _puestos(), _infoPersonas(), _gastosPersonas(), _personas() {}
 
 Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Persona> &personas) {
     _gastosPersonas = maxHeap(puestos.size(), idMaximo(personas));
@@ -55,7 +54,7 @@ Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Per
     this->_puestos = puestos;
 }
 
-Lollapatuza Lollapatuza::operator=(const Lollapatuza &lolla) {
+Lollapatuza& Lollapatuza::operator=(const Lollapatuza &lolla) {
     _personas = lolla._personas;
     _puestos = lolla._puestos;
     _infoPersonas = lolla._infoPersonas;
