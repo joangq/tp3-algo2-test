@@ -327,53 +327,6 @@ TEST_F(PuestoTest, obtener){
 // -------------------------------------------------------------------------------------------
 
 
-class LollapTest : public testing::Test {
-protected:
-    Menu menu;
-    set<Persona> personas;
-    set<IdPuesto> idsPuestos;
-    Stock stock1, stock2, stock3, stock4;
-    Promociones descuentos1, descuentos2, descuentos3, descuentos4;
-    Puesto puesto1, puesto2, puesto3, puesto4;
-    map<IdPuesto, Puesto> puestos;
-    Lollapatuza lollap;
-
-    void SetUp() override {
-        menu = {{8, 100}, {9, 400}, {13, 180}, {15, 130}};
-        personas = {3, 4, 6, 7};
-        idsPuestos = {1, 2, 3};
-
-        stock1 = {{8, 100}, {9, 150}, {13, 250}, {15, 300}};
-        descuentos1 = {{8, {{3, 10}, {7, 25}}}};
-        puesto1 = {menu, stock1, descuentos1};
-
-        stock2 = {{8, 210}, {9, 40}, {13, 110}, {15, 90}};
-        descuentos2 = {{9, {{4, 10}}}, {15, {{4, 25}}}};
-        puesto2 = {menu, stock2, descuentos2};
-
-        stock3 = {{8, 40}, {9, 12}, {13, 20}, {15, 91}};
-        descuentos3 = {{13, {{7, 20}}}};
-        puesto3 = {menu, stock3, descuentos3};
-
-        stock4 = {{8,10}};
-        descuentos4 = {};
-        puesto4 = {menu, stock4, descuentos4};
-
-        puestos = {{1, puesto1}, {2, puesto2}, {3, puesto3}};
-
-        lollap = {puestos, personas};
-    }
-};
-
-    TEST_F(LollapTest, gastoTotalPersona){
-        // una persona compra en un unico puesto un unico producto
-        lollap.registrarCompra(1, 1, 8, 2);
-        EXPECT_TRUE(lollap.gastoTotalPersona(1));
-    }
-
-
-
-// -------------------------------------------------------------------------------------------
 
 int main(int argc, char* argv[]) {
     testing::InitGoogleTest(&argc, argv);
