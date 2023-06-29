@@ -139,52 +139,6 @@ TEST_F(MinHeapTest, RemoverMinimo) {
     EXPECT_TRUE(h.minimo() == &puesto2);
 }
 
-
-
-class LollapatuzaTest : public testing::Test{
-protected:
-    Lollapatuza lolla;
-    Menu menu;
-    set<Persona> personas;
-    Stock stock2, stock6, stock7;
-    Promociones descuentos2, descuentos6, descuentos7;
-    Puesto puesto2, puesto6, puesto7;
-    map<IdPuesto, Puesto> puestos;
-
-    void SetUp() override {
-        menu = {{3, 500}, {4, 1000}, {5, 2500}, {7, 2000}};
-        personas = {2, 4, 8, 9};
-
-        descuentos7 = {{3, {{5, 30}}}, {7, {{2, 10}}}};
-        stock7 = {{3, 20}, {4, 20}, {5, 20}, {7, 20}};
-        puesto7 = {menu, stock7, descuentos7};
-
-        descuentos6 = {{4, {{4, 15}}}};
-        stock6 = {{3, 5}, {4, 15}, {5, 25}, {7, 5}};
-        puesto6 = {menu, stock6, descuentos6};
-
-        descuentos2 = {{7, {{3, 20}, {6, 25}}}};
-        stock2 = {{3, 10}, {4, 5}, {5, 30}, {7, 10}};
-        puesto2 = {menu, stock2, descuentos2};
-        puestos = {{2, puesto2}, {6, puesto6}, {7, puesto7}};
-
-        lolla = Lollapatuza(puestos, personas);
-    }
-
-};
-
-TEST_F(LollapatuzaTest, SaberPersonas){
-    EXPECT_TRUE(true);
-}
-
-TEST_F(LollapatuzaTest, SaberPuestos) {
-    EXPECT_TRUE(true);
-}
-
-TEST_F(LollapatuzaTest, hackear ){
-    EXPECT_TRUE(true);
-}
-
 // -------------------------------------------------------------------------------------------
 class PuestoTest : public testing::Test {
 protected:
