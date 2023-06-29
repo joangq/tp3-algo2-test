@@ -170,7 +170,7 @@ class LollapatuzaTest : public testing::Test{
         puesto6 = {stock6, descuentos6, menu};
         puesto7 = {stock7, descuentos7, menu};
         puestos = {{2, puesto2}, {6, puesto6}, {7, puesto7}};
-		lolla= {idsPuestos, personas};
+		lolla = Lollapatuza(idsPuestos, personas);
     }
 
 }
