@@ -285,6 +285,11 @@ TEST_F(PuestoTest, existeEnStock){
 	EXPECT_TRUE(puesto2.existeEnStock(9));
 }
 
+ /* FIXME: revisar el constructor de puestos y la funcion vender. 
+	cantComprasSinDesc de una persona que nunca compro ningun item  deberia ser 0.
+	¿Donde se inicializan los diccLogs sinDesc y conDesc?
+
+ */
 TEST_F(PuestoTest, cantComprasSinDesc){
 	EXPECT_EQ(puesto1.cantComprasSinDesc(1,9), 0);
 	puesto1.vender(3, 8, 2);
