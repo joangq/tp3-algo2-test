@@ -73,6 +73,8 @@ void Puesto::vender(Persona persona, Producto item, Cantidad cant) {
 
     comprasPorItem& comprasPersona = _comprasPorPersona[persona];
 
+    // Accede al item y no al indice del item
+
     _stock[item] = stockItem - cant;
     gastoPersona += precioFinal;
 
