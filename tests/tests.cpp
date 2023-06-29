@@ -336,6 +336,7 @@ protected:
     Promociones descuentos1, descuentos2, descuentos3, descuentos4;
     Puesto puesto1, puesto2, puesto3, puesto4;
     map<IdPuesto, Puesto> puestos;
+    Lollapatuza lollap;
 
     void SetUp() override {
         menu = {{8, 100}, {9, 400}, {13, 180}, {15, 130}};
