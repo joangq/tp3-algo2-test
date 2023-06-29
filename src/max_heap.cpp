@@ -16,8 +16,20 @@ maxHeap::maxHeap() {
 }
 
 maxHeap::maxHeap(int n, int maxid) {
-    for (int i = 0; i < n; i++)
-        nodos.push_back(Nodo(0, 0));
+    // Busco la potencia de 2 más cercana a v
+    unsigned int v = n;
+
+    v--;
+    v |= v >> 1;
+    v |= v >> 2;
+    v |= v >> 4;
+    v |= v >> 8;
+    v |= v >> 16;
+    v++;
+
+
+    for (int i = 0; i < v; i++)
+        nodos.push_back(Nodo(0, 1));
 
     for (int i = 0; i < maxid + 1; i++)
         indicesPersona.push_back(0);        

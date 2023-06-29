@@ -2,6 +2,8 @@
 #include <set>
 #include <list>
 #include <vector>
+#include <stdexcept>
+#include <iostream>
 #include "tipos.h"
 #include "puesto.h"
 #include "lollapatuza.h"
@@ -60,35 +62,40 @@ Lollapatuza Lollapatuza::operator=(const Lollapatuza& lolla) {
 }
 
 void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, Cantidad cant) {
-    Puesto puesto = this->_puestos.at(pid);
-    puesto.vender(persona, item, cant);
+    try {
+        Puesto& puesto = this->_puestos.at(pid);
+        puesto.vender(persona, item, cant);
 
-    infoCompras& compras = this->_infoPersonas[persona];
-    int precioConDescuento = puesto.precioConDescuento(item, cant);
-    compras.gastoTotal += precioConDescuento;
+        infoCompras& compras = this->_infoPersonas[persona];
+        int precioConDescuento = puesto.precioConDescuento(item, cant);
+        compras.gastoTotal += precioConDescuento;
 
-    // J: Se puede resumir en el mismo if?
-    if (precioConDescuento == puesto.precioSinDescuento(item, cant))
-        if (puesto.cantComprasSinDesc(persona, item) == 0)
-            compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
+        // J: Se puede resumir en el mismo if?
+        if (precioConDescuento == puesto.precioSinDescuento(item, cant))
+            if (puesto.cantComprasSinDesc(persona, item) == 1)
+                compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
 
-    _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
+        _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
+    } catch (out_of_range)  {
+        cout << "No existe un puesto con esa id." << endl;
+        return;
+    }
 }
 
 // J: Cambié "infoCompras" por "compras" para que no colisionen
 void Lollapatuza::hackear(Persona persona, Producto item) {
     infoCompras& compras = this->_infoPersonas[persona];
     minHeap& hackeablesItem = compras.hackeables[item];
-    Puesto& puestoAHackear = *(hackeablesItem.minimo());
+    Puesto* puestoAHackear = hackeablesItem.minimo();
 
-    Cant cantItem = puestoAHackear.cantComprasSinDesc(persona, item);
+    Cant cantItem = puestoAHackear->cantComprasSinDesc(persona, item);
 
     if (cantItem == 1)
         hackeablesItem.removerMinimo();
 
-    puestoAHackear.olvidarItem(persona, item);
+    puestoAHackear->olvidarItem(persona, item);
 
-    int precioItem = puestoAHackear.precioSinDescuento(item, 1);
+    int precioItem = puestoAHackear->precioSinDescuento(item, 1);
     compras.gastoTotal -= precioItem;
 
     _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
@@ -96,7 +103,15 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
 
 
 Dinero Lollapatuza::gastoTotalPersona(Persona persona) const {
-    return this->_infoPersonas.at(persona).gastoTotal;
+    Dinero gastoTotal;
+    try {
+        gastoTotal = _infoPersonas.at(persona).gastoTotal;
+    } catch (out_of_range)  {
+        cout << "No existe esta persona en el festival." << endl;
+        return 0;
+    }
+
+    return gastoTotal;
 }
 
 
@@ -165,15 +180,42 @@ Persona Lollapatuza::idMaximo(const set<Persona>& personas) {
 // Funciones no presentes directamente en el TP2, pero utilizadas
 // para el adecuado funcionamiento de fachada_lollapatuza.h
 Nat Lollapatuza::stockEnPuesto(IdPuesto idPuesto, const Producto& producto) const {
-    return _puestos.at(idPuesto).obtenerStock(producto);
+    Cantidad cant;
+
+    try {
+        cant = _puestos.at(idPuesto).obtenerStock(producto);
+    } catch (out_of_range)  {
+        cout << "No existe un puesto con esa id en el festival." << endl;
+        return 0;
+    }
+
+    return cant;
 }
 
 Nat Lollapatuza::descuentoEnPuesto(IdPuesto idPuesto, const Producto& producto, Nat cantidad) const {
-    return _puestos.at(idPuesto).obtenerDescuento(producto, cantidad);
+    Descuento desc;
+
+    try {
+        desc = _puestos.at(idPuesto).obtenerDescuento(producto, cantidad);
+    } catch (out_of_range)  {
+        cout << "No existe un puesto con esa id en el festival." << endl;
+        return 0;
+    }
+
+    return desc;
 }
 
 Nat Lollapatuza::gastoEnPuesto(IdPuesto idPuesto, Persona persona) const {
-    return _puestos.at(idPuesto).obtenerGasto(persona);
+    Dinero gasto;
+
+    try {
+        gasto = _puestos.at(idPuesto).obtenerGasto(persona);
+    } catch (out_of_range)  {
+        cout << "No existe un puesto con esa id en el festival." << endl;
+        return 0;
+    }
+
+    return gasto;
 }
 
 set<IdPuesto> Lollapatuza::idsDePuestos() const {
