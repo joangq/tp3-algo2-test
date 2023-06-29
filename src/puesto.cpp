@@ -99,6 +99,8 @@ void Puesto::olvidarItem(Persona persona, Producto item) {
         comprasItem.pop_front();
 
     this->_stock[item] += 1;
+
+    _gastoPorPersona[persona] -= precioSinDescuento(item, 1);
 }
 
 bool Puesto::existeEnStock(Producto item) const {
