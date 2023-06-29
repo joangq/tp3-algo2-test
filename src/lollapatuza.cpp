@@ -192,7 +192,7 @@ Nat Lollapatuza::stockEnPuesto(IdPuesto idPuesto, const Producto &producto) cons
 
     try {
         cant = _puestos.at(idPuesto).obtenerStock(producto);
-    } catch (out_of_range) {
+    } catch (std::exception& out_of_range) {
         cout << "No existe un puesto con esa id en el festival." << endl;
         return 0;
     }
