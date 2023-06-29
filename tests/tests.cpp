@@ -367,7 +367,7 @@ protected:
 
     TEST_F(LollapTest, gastoTotalPersona){
         // una persona compra en un unico puesto un unico producto
-        puesto1.vender(1, 8, 2);
+        lollap.registrarCompra(1, 1, 8, 2);
         EXPECT_TRUE(lollap.gastoTotalPersona(1));
     }
 
