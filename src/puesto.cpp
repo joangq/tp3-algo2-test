@@ -9,7 +9,7 @@ Puesto::Puesto() {
     
 }
 
-comprasPorItem::comprasPorItem(): conDesc(), sinDesc(){
+Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc(){
 }
 
 Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
@@ -36,7 +36,7 @@ Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
     this->_stock = stocks;
     this->_precios = precios;
     this->_descuentos = descuentos;
-    this.comprasPorItem = comprasPorItem();
+    this->comprasPorItem = comprasPorItem();
 
 }
 
