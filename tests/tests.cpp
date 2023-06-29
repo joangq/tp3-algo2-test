@@ -184,6 +184,7 @@ TEST_F(LollapatuzaTest, SaberPuestos) {
 TEST_F(LollapatuzaTest, hackear ){
     EXPECT_TRUE(true);
 }
+
 // -------------------------------------------------------------------------------------------
 class PuestoTest : public testing::Test {
 protected:
@@ -268,9 +269,7 @@ TEST_F(PuestoTest, existeEnStock){
     EXPECT_TRUE(puesto2.existeEnStock(9));
 }
 
-/* FIXME: revisar el constructor de puestos y la funcion vender.
-          cantComprasSinDesc de una persona que nunca compro ningun item  deberia ser 0.
-          ¿Donde se inicializan los diccLogs sinDesc y conDesc? */
+
 TEST_F(PuestoTest, cantComprasSinDesc){
     EXPECT_EQ(puesto1.cantComprasSinDesc(1,9), 0);
     puesto1.vender(3, 8, 2);
@@ -300,10 +299,6 @@ TEST_F(PuestoTest, precioConDescuento){
     EXPECT_EQ(puesto1.precioConDescuento(8,3), 810);
     EXPECT_FALSE(puesto1.precioConDescuento(8, 2) == 540);
 
-    // probar estos con decimales
-    //EXPECT_EQ(puesto2.precioConDescuento(9, 4), 2854.72);
-    //EXPECT_EQ(puesto2.precioConDescuento(15, 4), 391.16);
-
     EXPECT_FALSE(puesto3.precioConDescuento(8, 2) == 100);
 }
 
@@ -332,6 +327,52 @@ TEST_F(PuestoTest, obtener){
 // -------------------------------------------------------------------------------------------
 
 
+class LollapTest : public testing::Test {
+protected:
+    Menu menu;
+    set<Persona> personas;
+    set<IdPuesto> idsPuestos;
+    Stock stock1, stock2, stock3, stock4;
+    Promociones descuentos1, descuentos2, descuentos3, descuentos4;
+    Puesto puesto1, puesto2, puesto3, puesto4;
+    map<IdPuesto, Puesto> puestos;
+
+    void SetUp() override {
+        menu = {{8, 100}, {9, 400}, {13, 180}, {15, 130}};
+        personas = {3, 4, 6, 7};
+        idsPuestos = {1, 2, 3};
+
+        stock1 = {{8, 100}, {9, 150}, {13, 250}, {15, 300}};
+        descuentos1 = {{8, {{3, 10}, {7, 25}}}};
+        puesto1 = {menu, stock1, descuentos1};
+
+        stock2 = {{8, 210}, {9, 40}, {13, 110}, {15, 90}};
+        descuentos2 = {{9, {{4, 10}}}, {15, {{4, 25}}}};
+        puesto2 = {menu, stock2, descuentos2};
+
+        stock3 = {{8, 40}, {9, 12}, {13, 20}, {15, 91}};
+        descuentos3 = {{13, {{7, 20}}}};
+        puesto3 = {menu, stock3, descuentos3};
+
+        stock4 = {{8,10}};
+        descuentos4 = {};
+        puesto4 = {menu, stock4, descuentos4};
+
+        puestos = {{1, puesto1}, {2, puesto2}, {3, puesto3}};
+
+        lollap = {puestos, personas};
+    }
+};
+
+    TEST_F(LollapTest, gastoTotalPersona){
+        // una persona compra en un unico puesto un unico producto
+        puesto1.vender(1, 8, 2);
+        EXPECT_TRUE(lollap.gastoTotalPersona(1));
+    }
+
+
+
+// -------------------------------------------------------------------------------------------
 
 int main(int argc, char* argv[]) {
     testing::InitGoogleTest(&argc, argv);
