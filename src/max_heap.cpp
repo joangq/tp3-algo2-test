@@ -29,7 +29,7 @@ maxHeap::maxHeap(int n, Nat maxid) {
 
 
     for (int i = 0; i < v; i++)
-        nodos.push_back(Nodo(0, 1));
+        nodos.emplace_back(0, 1);
 
     for (int i = 0; i < maxid + 1; i++)
         indicesPersona.push_back(0);
