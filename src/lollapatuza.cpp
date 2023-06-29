@@ -77,7 +77,7 @@ void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, 
                 compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
 
         _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
-    } catch (out_of_range)  {
+    } catch (std::exception& out_of_range)  {
         cout << "No existe un puesto con esa id." << endl;
         return;
     }
