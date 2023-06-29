@@ -97,6 +97,8 @@ void Puesto::olvidarItem(Persona persona, Producto item) {
 
     if (compra == 0)
         comprasItem.pop_front();
+
+    this->_stock[item] += 1;
 }
 
 bool Puesto::existeEnStock(Producto item) const {
