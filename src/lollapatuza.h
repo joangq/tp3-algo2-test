@@ -23,7 +23,10 @@ class Lollapatuza {
          * 
          * Complejidad: O(I^2 P + (I log I) + A (I*P + log A))
          * */
-        Lollapatuza(diccLog<IdPuesto, Puesto> puestos, set<Persona> personas);
+        Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Persona>& personas);
+
+        // Operador de asignación
+        Lollapatuza operator=(const Lollapatuza& lolla);
 
         /** RegistrarCompra
          * Precondicion: La persona y el puesto deben ser
@@ -61,13 +64,13 @@ class Lollapatuza {
          * Precondicion: Ninguna
          * Complejidad: O(1)
         */
-        set<Persona>& obtenerPersonas();
+        const set<Persona>& obtenerPersonas() const;
 
         /** ObtenerPuestos
          * Precondicion: Ninguna
          * Complejidad: O(1)
         */
-        diccLog<IdPuesto, Puesto>& obtenerPuestos();
+        const diccLog<IdPuesto, Puesto>& obtenerPuestos();
 
     // Funciones no presentes directamente en el TP2, pero utilizadas
     // para el adecuado funcionamiento de fachada_lollapatuza.h

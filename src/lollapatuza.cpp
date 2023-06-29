@@ -14,7 +14,11 @@ Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() { };
 
 Lollapatuza::Lollapatuza() { };
 
-Lollapatuza::Lollapatuza(diccLog<IdPuesto, Puesto> puestos, set<Persona> personas) : _gastosPersonas(puestos.size(), idMaximo(personas)){
+Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Persona>& personas) :
+ _gastosPersonas(puestos.size(),
+idMaximo(personas)),
+_puestos(puestos),
+_personas(personas) {
     // Creo una lista que contenga todos los items, y la lleno.
     set<Item> totalItems;
 
@@ -45,14 +49,17 @@ Lollapatuza::Lollapatuza(diccLog<IdPuesto, Puesto> puestos, set<Persona> persona
         infoCompras compras = infoCompras(0, dic);
         this->_infoPersonas[persona] = compras;
     }
-
-    this->_puestos = puestos;
-    this->_personas = personas;
 }
 
-// J: Cambié "infoCompras" por "compras" para que no colisionen
+Lollapatuza Lollapatuza::operator=(const Lollapatuza& lolla) {
+    _personas = lolla._personas;
+    _puestos = lolla._puestos;
+
+    return *this;
+}
+
 void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, Cantidad cant) {
-    Puesto puesto = this->_puestos[pid];
+    Puesto puesto = this->_puestos.at(pid);
     puesto.vender(persona, item, cant);
 
     infoCompras& compras = this->_infoPersonas[persona];
@@ -97,34 +104,31 @@ Persona Lollapatuza::personaMayorGasto() const {
 }
 
 IdPuesto Lollapatuza::menorStock(Producto item) const {
-    // Utilizo INT32_MAX para que la comparación en el ciclo for
-    // valga siempre la primera vez que ocurre.
-    int32_t menorStock = INT32_MAX;
-    int32_t menorId = INT32_MAX;
+    int menorStock = -1;
+    int menorId = -1;
     Cant stockItem;
 
     // Itero sobre las tuplas (IdPuesto, Puesto)
     for (auto const& tup : _puestos) {
         IdPuesto pid = tup.first;
-        /* FIXME: (J) En el código original esto es
-                  const Puesto&, el tema es que
-                  "existeEnStock" y "obtenerStock"
-                  no podían aplicarse a algo de ese tipo
-                  y no lo pude solucionar desreferenciando. */
         Puesto puesto = tup.second;
 
         if (puesto.existeEnStock(item)) {
             stockItem = puesto.obtenerStock(item);
 
+            if (menorStock == -1)
+                menorStock = stockItem;
+                menorId = pid;
+
             if (stockItem <= menorStock) {
                 // Si son iguales, únicamente cambio el menorId si
                 // el pid nuevo es menor al actual.
                 if (stockItem == menorStock) {
-                    if (pid < menorId) // FIXME (J) Este if está raro.
-                        menorId = pid; // {stockIt == menSt /\ pid < menorID}
+                    if (pid < menorId) 
+                        menorId = pid; 
                 } 
-                else {               // \/ {stockIt != menSt}
-                    menorId = pid;     // No son la misma condición?
+                else {
+                    menorId = pid;    
                 }
                 menorStock = stockItem;
             }
@@ -134,18 +138,18 @@ IdPuesto Lollapatuza::menorStock(Producto item) const {
     return menorId;
 }
 
-set<Persona>& Lollapatuza::obtenerPersonas() {
+const set<Persona>& Lollapatuza::obtenerPersonas() const {
     return this->_personas;
 }
 
-diccLog<IdPuesto, Puesto>& Lollapatuza::obtenerPuestos() {
+const diccLog<IdPuesto, Puesto>& Lollapatuza::obtenerPuestos() {
     return this->_puestos;
 }
 
 Persona Lollapatuza::idMaximo(const set<Persona>& personas) {
-    // Utilizo INT32_MIN para que la comparación en el ciclo for
-    // valga siempre la primera vez que ocurre.
-    int32_t idMax = INT32_MIN;
+    // Utilizo 0 para que la comparación en el ciclo for
+    // valga siempre la primera vez que ocurre (como mínimo, estos valores son 0).
+    int idMax = 0;
 
     for (auto const& persona : personas) {
         if (persona > idMax) {

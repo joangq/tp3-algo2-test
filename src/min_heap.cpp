@@ -6,17 +6,18 @@ TupPuesto::TupPuesto(Nat id, Puesto* puesto) {
 }
 
 TupPuesto::TupPuesto() {
-    this->id = 0;
-    this->puesto = nullptr;
+    id = 0;
+    puesto = nullptr;
 }
 
-minHeap::minHeap() : nodos(0) {
-    this->tamActual = 0;
+minHeap::minHeap() {
+    tamActual = 0;
 }
 
 minHeap::minHeap(int n) {
-    this->nodos.reserve(n);
-    this->tamActual = 0;
+    nodos.resize(n);
+    nodos.reserve(n);
+    tamActual = 0;
 }
 
 void minHeap::agregar(TupPuesto tup) {

@@ -96,10 +96,11 @@ bool Puesto::existeEnStock(Producto item) const {
 }
 
 Nat Puesto::cantComprasSinDesc(Persona persona, Producto item) const {
-    const diccLog<Producto, list<Cantidad>>& d = _comprasPorPersona.at(persona).sinDesc;
-
-    if (d.count(item) == 1)
-        return d.at(item).size();
+    if (_comprasPorPersona.count(persona) == 1) {
+        const diccLog<Producto, list<Cantidad>>& d = _comprasPorPersona.at(persona).sinDesc;
+        if (d.count(item) == 1)
+            return d.at(item).size();
+    }
     
     return 0;
 }
