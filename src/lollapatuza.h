@@ -14,6 +14,7 @@ using namespace std;
 
 class Lollapatuza {
     public:
+        Lollapatuza();
         /** CrearLolla
          * Precondicion: Todos los puestos deben
          * tener el mismo precio para los mismos items,
@@ -67,6 +68,13 @@ class Lollapatuza {
          * Complejidad: O(1)
         */
         diccLog<IdPuesto, Puesto>& obtenerPuestos();
+
+    // Funciones no presentes directamente en el TP2, pero utilizadas
+    // para el adecuado funcionamiento de fachada_lollapatuza.h
+    Nat stockEnPuesto(IdPuesto idPuesto, const Producto& producto) const;
+    Nat descuentoEnPuesto(IdPuesto idPuesto, const Producto& producto, Nat cantidad) const;
+    Nat gastoEnPuesto(IdPuesto idPuesto, Persona persona) const;
+    set<IdPuesto> idsDePuestos() const;
 
     private:
     struct infoCompras {

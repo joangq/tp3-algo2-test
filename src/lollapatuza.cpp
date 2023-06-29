@@ -12,6 +12,8 @@ Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHe
 
 Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() { };
 
+Lollapatuza::Lollapatuza() { };
+
 Lollapatuza::Lollapatuza(diccLog<IdPuesto, Puesto> puestos, set<Persona> personas) : _gastosPersonas(puestos.size(), idMaximo(personas)){
     // Creo una lista que contenga todos los items, y la lleno.
     set<Item> totalItems;
@@ -152,4 +154,29 @@ Persona Lollapatuza::idMaximo(const set<Persona>& personas) {
     }
 
     return idMax;
+}
+
+// Funciones no presentes directamente en el TP2, pero utilizadas
+// para el adecuado funcionamiento de fachada_lollapatuza.h
+Nat Lollapatuza::stockEnPuesto(IdPuesto idPuesto, const Producto& producto) const {
+    return _puestos.at(idPuesto).obtenerStock(producto);
+}
+
+Nat Lollapatuza::descuentoEnPuesto(IdPuesto idPuesto, const Producto& producto, Nat cantidad) const {
+    return _puestos.at(idPuesto).obtenerDescuento(producto, cantidad);
+}
+
+Nat Lollapatuza::gastoEnPuesto(IdPuesto idPuesto, Persona persona) const {
+    return _puestos.at(idPuesto).obtenerGasto(persona);
+}
+
+set<IdPuesto> Lollapatuza::idsDePuestos() const {
+    set<IdPuesto> ids;
+
+    // Itero sobre las tuplas (IdPuesto, Puesto)
+    for (auto const& tup : _puestos) {
+        ids.emplace(tup.first);
+    }
+
+    return ids;
 }
