@@ -13,13 +13,13 @@ Puesto::Puesto(const Menu& precios, const Stock& stocks, const Promociones& desc
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
     for (auto& itemDescuentos : descuentos) {
         Producto item = itemDescuentos.first;
-        const map<Cantidad, Nat>& dicc = itemDescuentos.second;
+        const map<Cantidad, Nat>& cantidadesPorItem = itemDescuentos.second;
 
-        vector<Cantidad> descPorItem(dicc.size());
+        vector<Cantidad> descPorItem(cantidadesPorItem.size());
 
         // Itero sobre las tuplas (Cant, Nat)
         int k = 0;
-        for (auto& infoDescuento : dicc) descPorItem[k++] = infoDescuento.first;
+        for (auto& infoDescuento : cantidadesPorItem) descPorItem[k++] = infoDescuento.first;
 
         descPorItem = mergeSort(descPorItem);
 
@@ -77,12 +77,12 @@ void Puesto::olvidarItem(const Persona& persona, const Producto& item) {
     list<Cantidad>& comprasItem = comprasPersonas.sinDesc[item];
     Nat& compra = comprasItem.front();
 
-    compra -= 1;
+    compra--;
 
     if (compra == 0)
         comprasItem.pop_front();
 
-    this->_stock[item] += 1;
+    this->_stock[item]++;
 
     _gastoPorPersona[persona] -= precioSinDescuento(item, 1);
 }

@@ -77,7 +77,17 @@ class Puesto {
          * Complejidad: O(1)
         */
         const Menu& obtenerMenu();
+
+        /** Getter - Stock
+         * Precondicion: Nada
+         * Complejidad: O(1)
+        */
         const Stock& stock();
+
+        /** Getter - Promociones
+         * Precondicion: Nada
+         * Complejidad: O(1)
+        */
         const Promociones& promociones();
 
     private:
