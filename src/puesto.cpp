@@ -7,7 +7,7 @@
 
 Puesto::Puesto() {}
 
-Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc(){}
+Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc() {};
 
 Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
