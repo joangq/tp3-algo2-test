@@ -226,7 +226,7 @@ protected:
 		descuentos2 = {{9, {{4, 12}}}, {15, {{4, 23}}}};
 		puesto2 = {menu, stock2, descuentos2};
 	
-		stock3 = {{8, 40}, {9, 12}, {13, 2}, {15, 91}};
+		stock3 = {{8, 40}, {9, 12}, {13, 20}, {15, 91}};
 		descuentos3 = {{13, {{7, 19}}}};
 		puesto3 = {menu, stock3, descuentos3};
 
@@ -286,7 +286,7 @@ TEST_F(PuestoTest, existeEnStock){
 }
 
 TEST_F(PuestoTest, cantComprasSinDesc){
-	//EXPECT_EQ(puesto1.cantComprasSinDesc(1,9), 0);
+	EXPECT_EQ(puesto1.cantComprasSinDesc(1,9), 0);
 	puesto1.vender(3, 8, 2);
 	EXPECT_EQ(puesto1.cantComprasSinDesc(3,8), 1);
 	puesto1.vender(3, 8, 1);
@@ -299,7 +299,7 @@ TEST_F(PuestoTest, cantComprasSinDesc){
 	EXPECT_EQ(puesto3.cantComprasSinDesc(2, 15), 1);
 	puesto3.vender(3, 15, 1);
 	EXPECT_EQ(puesto3.cantComprasSinDesc(3, 15), 1);
-	//EXPECT_EQ(puesto3.cantComprasSinDesc(3, 8), 0);
+	EXPECT_EQ(puesto3.cantComprasSinDesc(3, 8), 0);
 	
 	puesto2.vender(1, 9, 7);
 	EXPECT_EQ(puesto2.cantComprasSinDesc(1,9), 0);
@@ -307,6 +307,26 @@ TEST_F(PuestoTest, cantComprasSinDesc){
 	puesto2.vender(2, 15, 2);
 	EXPECT_EQ(puesto2.cantComprasSinDesc(1,9), 0);
 	EXPECT_EQ(puesto2.cantComprasSinDesc(2, 15), 1);
+}
+
+TEST_F(PuestoTest, precioConDescuento){
+	EXPECT_EQ(puesto1.precioConDescuento(8, 1), 300);
+	EXPECT_EQ(puesto1.precioConDescuento(8,3), 810);
+	EXPECT_FALSE(puesto1.precioConDescuento(8, 2) == 540);
+
+	//EXPECT_EQ(puesto2.precioConDescuento(9, 4), 2854.72);
+	//EXPECT_EQ(puesto2.precioConDescuento(15, 4), 391.16);
+
+	EXPECT_FALSE(puesto3.precioConDescuento(8, 2) == 100);
+}
+
+TEST_F(PuestoTest, precioSinDescuento){
+	EXPECT_EQ(puesto1.precioSinDescuento(8, 2), 600);
+	EXPECT_FALSE(puesto1.precioSinDescuento(8, 3) == 810);
+	EXPECT_EQ(puesto1.precioSinDescuento(13, 2), 2000);
+
+	EXPECT_EQ(puesto3.precioSinDescuento(15, 2), 254);
+
 }
 
 

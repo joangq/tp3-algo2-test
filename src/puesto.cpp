@@ -33,7 +33,7 @@ Puesto::Puesto(Menu precios, Stock stocks, Promociones descuentos) {
     this->_stock = stocks;
     this->_precios = precios;
     this->_descuentos = descuentos;
-    // this->comprasPorItem = comprasPorItem();
+
 
 }
 
