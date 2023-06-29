@@ -1,10 +1,6 @@
 #include <map>
 #include <set>
-#include <list>
 #include <utility>
-#include <stdexcept>
-#include <iostream>
-#include "tipos.h"
 #include "puesto.h"
 #include "lollapatuza.h"
 
@@ -59,22 +55,17 @@ Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Per
 Lollapatuza& Lollapatuza::operator=(const Lollapatuza &lolla) = default;
 
 void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, Cantidad cant) {
-    try {
-        Puesto &puesto = this->_puestos.at(pid);
-        (&puesto)->vender(persona, item, cant);
+    Puesto &puesto = this->_puestos.at(pid);
+    (&puesto)->vender(persona, item, cant);
 
-        infoCompras &compras = this->_infoPersonas[persona];
-        const Nat precioConDescuento = (&puesto)->precioConDescuento(item, cant);
-        compras.gastoTotal += precioConDescuento;
+    infoCompras &compras = this->_infoPersonas[persona];
+    const Nat precioConDescuento = (&puesto)->precioConDescuento(item, cant);
+    compras.gastoTotal += precioConDescuento;
 
-        if (precioConDescuento == puesto.precioSinDescuento(item, cant) && puesto.cantComprasSinDesc(persona, item) == 1)
-            compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
+    if (precioConDescuento == puesto.precioSinDescuento(item, cant) && puesto.cantComprasSinDesc(persona, item) == 1)
+        compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
 
-        _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
-    } catch (std::exception &out_of_range) {
-        cout << "No existe un puesto con esa id." << endl;
-        return;
-    }
+    _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
 }
 
 // J: Cambié "infoCompras" por "compras" para que no colisionen
@@ -102,15 +93,7 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
 
 
 Dinero Lollapatuza::gastoTotalPersona(Persona persona) const {
-    Dinero gastoTotal;
-    try {
-        gastoTotal = _infoPersonas.at(persona).gastoTotal;
-    } catch (std::exception& out_of_range) {
-        cout << "No existe esta persona en el festival." << endl;
-        return 0;
-    }
-
-    return gastoTotal;
+    return _infoPersonas.at(persona).gastoTotal;
 }
 
 
@@ -158,7 +141,8 @@ const diccLog<IdPuesto, Puesto> &Lollapatuza::obtenerPuestos() {
 Persona Lollapatuza::idMaximo(const set<Persona> &personas) {
     Nat idMax = 0; // El id mínimo es 0
     for (auto const &idPersona: personas)
-        if (idPersona > idMax) idMax = idPersona;
+        if (idPersona > idMax)
+            idMax = idPersona;
 
     return idMax;
 }
@@ -166,42 +150,15 @@ Persona Lollapatuza::idMaximo(const set<Persona> &personas) {
 /* Funciones auxiliares utilizadas para el correcto funcionamiento de fachada_lollapatuza */
 
 Nat Lollapatuza::stockEnPuesto(IdPuesto idPuesto, const Producto &producto) const {
-    Cantidad cant;
-
-    try {
-        cant = _puestos.at(idPuesto).obtenerStock(producto);
-    } catch (std::exception& out_of_range) {
-        cout << "No existe un puesto con esa id en el festival." << endl;
-        return 0;
-    }
-
-    return cant;
+    return _puestos.at(idPuesto).obtenerStock(producto);;
 }
 
 Nat Lollapatuza::descuentoEnPuesto(IdPuesto idPuesto, const Producto &producto, Nat cantidad) const {
-    Descuento desc;
-
-    try {
-        desc = _puestos.at(idPuesto).obtenerDescuento(producto, cantidad);
-    } catch (std::exception& out_of_range) {
-        cout << "No existe un puesto con esa id en el festival." << endl;
-        return 0;
-    }
-
-    return desc;
+    return _puestos.at(idPuesto).obtenerDescuento(producto, cantidad);;
 }
 
 Nat Lollapatuza::gastoEnPuesto(IdPuesto idPuesto, Persona persona) const {
-    Dinero gasto;
-
-    try {
-        gasto = _puestos.at(idPuesto).obtenerGasto(persona);
-    } catch (std::exception& out_of_range) {
-        cout << "No existe un puesto con esa id en el festival." << endl;
-        return 0;
-    }
-
-    return gasto;
+    return _puestos.at(idPuesto).obtenerGasto(persona);;
 }
 
 set<IdPuesto> Lollapatuza::idsDePuestos() const {

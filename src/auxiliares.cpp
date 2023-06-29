@@ -31,7 +31,7 @@ vector<Nat> merge(const vector<Nat>& A, const vector<Nat>& B) {
     return result;
 }
 
-vector<Nat> mergeSort(vector<Nat> A) {
+vector<Nat> mergeSort(const vector<Nat>& A) {
     Nat n = A.size();
     if (n <= 1) return A;
 
