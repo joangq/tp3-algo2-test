@@ -9,7 +9,7 @@ Puesto::Puesto() = default;
 
 Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc() {};
 
-Puesto::Puesto(Menu precios, Stock stocks, const Promociones& descuentos) {
+Puesto::Puesto(const Menu& precios, const Stock& stocks, const Promociones& descuentos) {
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
     for (auto& itemDescuentos : descuentos) {
         Item item = itemDescuentos.first;
@@ -28,8 +28,8 @@ Puesto::Puesto(Menu precios, Stock stocks, const Promociones& descuentos) {
         this->_descuentosPorItem[item] = std::move(temp);
     }
 
-    this->_stock = std::move(stocks);
-    this->_precios = std::move(precios);
+    this->_stock = stocks;
+    this->_precios = precios;
     this->_descuentos = descuentos;
 
 
