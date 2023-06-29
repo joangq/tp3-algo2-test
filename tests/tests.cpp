@@ -150,8 +150,8 @@ class LollapatuzaTest : public testing::Test{
     set<Persona> personas, personas89, personas49;
     Stock stock2, stock6, stock7;
     Promociones descuentos2, descuentos6, descuentos7;
-    aed2_Puesto puesto2, puesto6, puesto7;
-    map<IdPuesto, aed2_Puesto> puestos;
+    Puesto puesto2, puesto6, puesto7;
+    map<IdPuesto, Puesto> puestos;
 
     void SetUp() {
         menu = {{3, 500}, {4, 1000}, {5, 2500}, {7, 2000}};
@@ -164,9 +164,9 @@ class LollapatuzaTest : public testing::Test{
         descuentos2 = {{7, {{3, 20}, {6, 25}}}};
         descuentos6 = {{4, {{4, 15}}}};
         descuentos7 = {{3, {{5, 30}}}, {7, {{2, 10}}}};
-        puesto2 = {stock2, descuentos2, menu};
-        puesto6 = {stock6, descuentos6, menu};
-        puesto7 = {stock7, descuentos7, menu};
+        puesto2 = {menu, stock2, descuentos2};
+        puesto6 = {menu, stock6, descuentos6};
+        puesto7 = {menu, stock7, descuentos7};
         puestos = {{2, puesto2}, {6, puesto6}, {7, puesto7}};
 		lolla = Lollapatuza(puestos, personas);
     }
