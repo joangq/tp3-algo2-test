@@ -9,6 +9,4 @@ vector<Nat> merge(const vector<Nat>& A, const vector<Nat>& B);
 
 vector<Nat> mergeSort(vector<Nat> A);
 
-
-
 #endif //AUXILIARES

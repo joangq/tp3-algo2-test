@@ -62,13 +62,11 @@ void minHeap::hacerMinHeap(int i) {
     int der = Der(i);
     int menor = i;
 
-    if (izq < tamActual and nodos[izq].id < nodos[menor].id) {
+    if (izq < tamActual and nodos[izq].id < nodos[menor].id)
         menor = izq;
-    }
 
-    if (der < tamActual and nodos[der].id < nodos[menor].id) {
+    if (der < tamActual and nodos[der].id < nodos[menor].id)
         menor = der;
-    }
 
     if (menor != i) {
         swap(i, menor);
