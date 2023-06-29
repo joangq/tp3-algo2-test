@@ -44,13 +44,13 @@ Cantidad Puesto::obtenerStock(Producto item) const {
 Descuento Puesto::obtenerDescuento(Producto item, Cantidad cant) const {
     if (cant == 0 || _descuentosPorItem.count(item) == 0)
         return 0;
-    
+
     const vector<Cant>& cantidades = _descuentosPorItem.at(item);
 
     if (cant < cantidades[0])
         return 0;
-    
-    
+
+
     int i = busquedaBinaria(cantidades, cant, 0, cantidades.size());
     return _descuentos.at(item).at(cantidades[i]);
 }
@@ -59,7 +59,7 @@ Dinero Puesto::obtenerGasto(Persona persona) const {
     if (_gastoPorPersona.count(persona) == 1) {
         return _gastoPorPersona.at(persona);
     }
-    
+
     return 0;
 }
 
@@ -113,7 +113,7 @@ Nat Puesto::cantComprasSinDesc(Persona persona, Producto item) const {
         if (d.count(item) == 1)
             return d.at(item).size();
     }
-    
+
     return 0;
 }
 
@@ -130,7 +130,7 @@ Dinero Puesto::precioConDescuento(Producto item, Cantidad cant) const {
 }
 
 Dinero Puesto::precioSinDescuento(Producto item, Cantidad cant) const {
-     return _precios.at(item) * cant;
+    return _precios.at(item) * cant;
 }
 
 Menu& Puesto::obtenerMenu() {

@@ -1,8 +1,8 @@
 #include "min_heap.h"
 
 TupPuesto::TupPuesto(Nat id, Puesto* puesto) {
-        this->id = id;
-        this->puesto = puesto;
+    this->id = id;
+    this->puesto = puesto;
 }
 
 TupPuesto::TupPuesto() {

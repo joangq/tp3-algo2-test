@@ -10,25 +10,26 @@
 
 using namespace std;
 
-Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables): gastoTotal(gastoTotal), hackeables(hackeables) { };
+Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHeap> hackeables) : gastoTotal(
+        gastoTotal), hackeables(hackeables) {};
 
-Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() { };
+Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() {};
 
 Lollapatuza::Lollapatuza() : _puestos(), _infoPersonas(), _gastosPersonas(), _personas() {};
 
-Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Persona>& personas) {
+Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Persona> &personas) {
     _gastosPersonas = maxHeap(puestos.size(), idMaximo(personas));
     // Creo una lista que contenga todos los items, y la lleno.
     set<Item> totalItems = set<Item>();
 
     // Itero sobre las tuplas de (IdPuesto, Puesto).
-    for (auto const& tup : puestos) {
+    for (auto const &tup: puestos) {
         // Utilizo referencias para evitar copiar la estructura.
         Puesto puesto = tup.second;
-        const Stock& stock = puesto.stock();
+        const Stock &stock = puesto.stock();
 
         // Itero sobre las tuplas de (Item, Cant).
-        for (auto const& itemTup : stock) {
+        for (auto const &itemTup: stock) {
             Item item = itemTup.first;
             // std::set no inserta el elemento si ya está en el conjunto.
             totalItems.emplace(item);
@@ -37,10 +38,10 @@ Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Per
 
     map<Nat, minHeap> dic = map<Nat, minHeap>();
 
-    for (auto item : totalItems)
+    for (auto item: totalItems)
         dic[item] = minHeap(puestos.size()); // Copia implícita.
 
-    for (auto persona : personas) {
+    for (auto persona: personas) {
         auto nodo = Nodo(0, persona);
         _gastosPersonas.agregar(nodo);
 
@@ -53,7 +54,7 @@ Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Per
     this->_puestos = puestos;
 }
 
-Lollapatuza Lollapatuza::operator=(const Lollapatuza& lolla) {
+Lollapatuza Lollapatuza::operator=(const Lollapatuza &lolla) {
     _personas = lolla._personas;
     _puestos = lolla._puestos;
     _infoPersonas = lolla._infoPersonas;
@@ -64,12 +65,12 @@ Lollapatuza Lollapatuza::operator=(const Lollapatuza& lolla) {
 
 void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, Cantidad cant) {
     try {
-        Puesto& puesto = this->_puestos.at(pid);
+        Puesto &puesto = this->_puestos.at(pid);
         (&puesto)->vender(persona, item, cant);
 
-    infoCompras& compras = this->_infoPersonas[persona];
-    int precioConDescuento = (&puesto)->precioConDescuento(item, cant);
-    compras.gastoTotal += precioConDescuento;
+        infoCompras &compras = this->_infoPersonas[persona];
+        int precioConDescuento = (&puesto)->precioConDescuento(item, cant);
+        compras.gastoTotal += precioConDescuento;
 
         // J: Se puede resumir en el mismo if?
         if (precioConDescuento == puesto.precioSinDescuento(item, cant))
@@ -77,7 +78,7 @@ void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, 
                 compras.hackeables[item].agregar(TupPuesto(pid, &puesto));
 
         _gastosPersonas.modificarGasto(persona, compras.gastoTotal);
-    } catch (std::exception& out_of_range)  {
+    } catch (std::exception &out_of_range) {
         cout << "No existe un puesto con esa id." << endl;
         return;
     }
@@ -85,15 +86,15 @@ void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, 
 
 // J: Cambié "infoCompras" por "compras" para que no colisionen
 void Lollapatuza::hackear(Persona persona, Producto item) {
-    infoCompras& compras = this->_infoPersonas[persona];
-    minHeap& hackeablesItem = compras.hackeables[item];
-    Puesto* puestoAHackear = hackeablesItem.minimo();
+    infoCompras &compras = this->_infoPersonas[persona];
+    minHeap &hackeablesItem = compras.hackeables[item];
+    Puesto *puestoAHackear = hackeablesItem.minimo();
 
     if (puestoAHackear == nullptr)
         return;
 
     puestoAHackear->olvidarItem(persona, item);
-    
+
     Cant cantItem = puestoAHackear->cantComprasSinDesc(persona, item);
 
     if (cantItem == 0) {
@@ -112,7 +113,7 @@ Dinero Lollapatuza::gastoTotalPersona(Persona persona) const {
     Dinero gastoTotal;
     try {
         gastoTotal = _infoPersonas.at(persona).gastoTotal;
-    } catch (out_of_range)  {
+    } catch (out_of_range) {
         cout << "No existe esta persona en el festival." << endl;
         return 0;
     }
@@ -131,7 +132,7 @@ IdPuesto Lollapatuza::menorStock(Producto item) const {
     Cant stockItem;
 
     // Itero sobre las tuplas (IdPuesto, Puesto)
-    for (auto const& tup : _puestos) {
+    for (auto const &tup: _puestos) {
         IdPuesto pid = tup.first;
         Puesto puesto = tup.second;
 
@@ -147,11 +148,10 @@ IdPuesto Lollapatuza::menorStock(Producto item) const {
                 // Si son iguales, únicamente cambio el menorId si
                 // el pid nuevo es menor al actual.
                 if (stockItem == menorStock) {
-                    if (pid < menorId) 
-                        menorId = pid; 
-                } 
-                else {
-                    menorId = pid;    
+                    if (pid < menorId)
+                        menorId = pid;
+                } else {
+                    menorId = pid;
                 }
                 menorStock = stockItem;
             }
@@ -161,20 +161,20 @@ IdPuesto Lollapatuza::menorStock(Producto item) const {
     return menorId;
 }
 
-const set<Persona>& Lollapatuza::obtenerPersonas() const {
+const set<Persona> &Lollapatuza::obtenerPersonas() const {
     return this->_personas;
 }
 
-const diccLog<IdPuesto, Puesto>& Lollapatuza::obtenerPuestos() {
+const diccLog<IdPuesto, Puesto> &Lollapatuza::obtenerPuestos() {
     return this->_puestos;
 }
 
-Persona Lollapatuza::idMaximo(const set<Persona>& personas) {
+Persona Lollapatuza::idMaximo(const set<Persona> &personas) {
     // Utilizo 0 para que la comparación en el ciclo for
     // valga siempre la primera vez que ocurre (como mínimo, estos valores son 0).
     int idMax = 0;
 
-    for (auto const& persona : personas) {
+    for (auto const &persona: personas) {
         if (persona > idMax) {
             idMax = persona;
         }
@@ -185,12 +185,12 @@ Persona Lollapatuza::idMaximo(const set<Persona>& personas) {
 
 // Funciones no presentes directamente en el TP2, pero utilizadas
 // para el adecuado funcionamiento de fachada_lollapatuza.h
-Nat Lollapatuza::stockEnPuesto(IdPuesto idPuesto, const Producto& producto) const {
+Nat Lollapatuza::stockEnPuesto(IdPuesto idPuesto, const Producto &producto) const {
     Cantidad cant;
 
     try {
         cant = _puestos.at(idPuesto).obtenerStock(producto);
-    } catch (out_of_range)  {
+    } catch (out_of_range) {
         cout << "No existe un puesto con esa id en el festival." << endl;
         return 0;
     }
@@ -198,12 +198,12 @@ Nat Lollapatuza::stockEnPuesto(IdPuesto idPuesto, const Producto& producto) cons
     return cant;
 }
 
-Nat Lollapatuza::descuentoEnPuesto(IdPuesto idPuesto, const Producto& producto, Nat cantidad) const {
+Nat Lollapatuza::descuentoEnPuesto(IdPuesto idPuesto, const Producto &producto, Nat cantidad) const {
     Descuento desc;
 
     try {
         desc = _puestos.at(idPuesto).obtenerDescuento(producto, cantidad);
-    } catch (out_of_range)  {
+    } catch (out_of_range) {
         cout << "No existe un puesto con esa id en el festival." << endl;
         return 0;
     }
@@ -216,7 +216,7 @@ Nat Lollapatuza::gastoEnPuesto(IdPuesto idPuesto, Persona persona) const {
 
     try {
         gasto = _puestos.at(idPuesto).obtenerGasto(persona);
-    } catch (out_of_range)  {
+    } catch (out_of_range) {
         cout << "No existe un puesto con esa id en el festival." << endl;
         return 0;
     }
@@ -228,7 +228,7 @@ set<IdPuesto> Lollapatuza::idsDePuestos() const {
     set<IdPuesto> ids;
 
     // Itero sobre las tuplas (IdPuesto, Puesto)
-    for (auto const& tup : _puestos) {
+    for (auto const &tup: _puestos) {
         ids.emplace(tup.first);
     }
 

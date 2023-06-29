@@ -1,17 +1,17 @@
 #include "max_heap.h"
 #include "heap_aux.h"
 
-Nodo::Nodo() { 
+Nodo::Nodo() {
     gasto = 0;
     id = 0;
 }
 
 Nodo::Nodo(Nat gasto, Id id) {
-        this->gasto = gasto;
-        this->id = id;
-    }
+    this->gasto = gasto;
+    this->id = id;
+}
 
-maxHeap::maxHeap() { 
+maxHeap::maxHeap() {
     tamActual = 0;
 }
 
@@ -32,12 +32,12 @@ maxHeap::maxHeap(int n, int maxid) {
         nodos.push_back(Nodo(0, 1));
 
     for (int i = 0; i < maxid + 1; i++)
-        indicesPersona.push_back(0);        
-    
+        indicesPersona.push_back(0);
+
     tamActual = 0;
 }
 
-void maxHeap::agregar(Nodo elem) { 
+void maxHeap::agregar(Nodo elem) {
     // Creo una copia y le sumo 1 al id para poder representar a personas
     // con id = 0. Ver TP2 para una aclaración más precisa.
     Nodo copia_elem = elem;
@@ -49,15 +49,15 @@ void maxHeap::agregar(Nodo elem) {
 
     tamActual++;
 
-    siftUp(i); 
+    siftUp(i);
 }
 
-Id maxHeap::maximo() const { 
+Id maxHeap::maximo() const {
     // Le sumo 1 porque antes le había restado 1.
     return nodos[0].id - 1;
 }
 
-void maxHeap::removerMaximo() { 
+void maxHeap::removerMaximo() {
     nodos[tamActual] = Nodo(0, 0);
     tamActual--;
     nodos[0] = nodos[tamActual];
@@ -65,19 +65,19 @@ void maxHeap::removerMaximo() {
 }
 
 
-void maxHeap::modificarGasto(Persona persona, Nat nuevoGasto) { 
+void maxHeap::modificarGasto(Persona persona, Nat nuevoGasto) {
     int i = indicesPersona[persona];
     Dinero gasto = nodos[i].gasto;
     nodos[i].gasto = nuevoGasto;
 
-    if (nuevoGasto < gasto) {
+    if (nuevoGasto < gasto)
         hacerMaxHeap(i);
-    } else if (nuevoGasto > gasto) {
+    else if (nuevoGasto > gasto)
         siftUp(i);
-    }
+
 }
 
-void maxHeap::hacerMaxHeap(int i) { 
+void maxHeap::hacerMaxHeap(int i) {
     int izq = Izq(i);
     int der = Der(i);
     int mayor = i;
@@ -101,8 +101,8 @@ void maxHeap::hacerMaxHeap(int i) {
         Nodo nIzq = nodos[izq];
         if (nIzq.gasto >= nMayor.gasto) {
             if (nIzq.gasto == nMayor.gasto) {
-                    if (nMayor.id > nIzq.id)
-                        mayor = izq;
+                if (nMayor.id > nIzq.id)
+                    mayor = izq;
             } else {
                 mayor = izq;
             }
@@ -127,7 +127,7 @@ void maxHeap::hacerMaxHeap(int i) {
     }
 }
 
-void maxHeap::swap(int i, int j) { 
+void maxHeap::swap(int i, int j) {
     // Primero, swappeo los indices en el diccionario de índices.
     // Les resto 1 porque las ids guardadas en nodos son 1 más que las reales.
     int tempIndice = indicesPersona[nodos[i].id - 1];
@@ -154,5 +154,5 @@ void maxHeap::siftUp(int i) {
         j = Padre(i);
         swap(i, j);
         i = j;
-    }   
+    }
 }
