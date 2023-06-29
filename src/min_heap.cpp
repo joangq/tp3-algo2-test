@@ -14,7 +14,7 @@ minHeap::minHeap() {
     tamActual = 0;
 }
 
-minHeap::minHeap(int n) {
+minHeap::minHeap(Nat n) {
     unsigned int v = n;
 
     v--;

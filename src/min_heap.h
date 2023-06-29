@@ -18,7 +18,7 @@ struct TupPuesto {
 class minHeap {
    public:
     minHeap();
-    minHeap(int n);
+    minHeap(Nat n);
 
     void agregar(TupPuesto tup);
     Puesto* minimo() const;
