@@ -6,7 +6,7 @@
 #include "puesto.h"
 #include "auxiliares.h"
 
-Puesto::Puesto() {}
+Puesto::Puesto() = default;
 
 Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc() {};
 

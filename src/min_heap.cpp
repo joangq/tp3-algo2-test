@@ -1,18 +1,10 @@
 #include "min_heap.h"
 
-TupPuesto::TupPuesto(Nat id, Puesto* puesto) {
-    this->id = id;
-    this->puesto = puesto;
-}
+TupPuesto::TupPuesto(Nat id, Puesto* puesto): id(id), puesto(puesto) {}
 
-TupPuesto::TupPuesto() {
-    id = 0;
-    puesto = nullptr;
-}
+TupPuesto::TupPuesto(): id(0), puesto(nullptr) {}
 
-minHeap::minHeap() {
-    tamActual = 0;
-}
+minHeap::minHeap(): tamActual(0) {}
 
 minHeap::minHeap(Nat n) {
     unsigned int v = n;
@@ -38,7 +30,7 @@ void minHeap::agregar(TupPuesto tup) {
 
     // Sift up.
     while (i != 0 and nodos[i].id < nodos[Padre(i)].id) {
-        int j = Padre(i);
+        Nat j = Padre(i);
         swap(i, j);
         i = j;
     }
