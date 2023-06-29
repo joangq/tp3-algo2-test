@@ -182,7 +182,7 @@ TEST_F(LollapatuzaTest, SaberPuestos) {
 	diccLog<IdPuesto, Puesto> puestosDeLolla = lolla.obtenerPuestos();
 	set<IdPuesto> claves = {};
 	for(IdPuesto clave: puestosDeLolla){
-		claves.pushBack(clave);
+		claves.emplace(clave);
 	}
 
 	EXPECT_EQ(claves, idsPuestos);
