@@ -140,7 +140,7 @@ void maxHeap::siftUp(int i) {
 
     // Sift up.
     while (i != 0 && nodos[i].gasto == nodos[j].gasto && nodos[i].id < nodos[j].id) {
-        int j = Padre(i);
+        j = Padre(i);
         swap(i, j);
         i = j;
     }   
