@@ -7,17 +7,15 @@ FachadaLollapatuza::FachadaLollapatuza(
     map<IdPuesto, Puesto> copiaPuestos;
 
     // Itero sobre las tuplas <IdPuesto, aed2_Puesto>
-    for (auto const &tup : infoPuestos) {
-        IdPuesto id = tup.first;
-        const aed2_Puesto &puesto = tup.second;
-        copiaPuestos[id] =
-            Puesto(puesto.menu, puesto.stock, puesto.promociones);
+    for (auto const &infoPuesto : infoPuestos) {
+        IdPuesto id = infoPuesto.first;
+        const aed2_Puesto &puesto = infoPuesto.second;
+        copiaPuestos[id] = Puesto(puesto.menu, puesto.stock, puesto.promociones);
     }
     
     _lolla = Lollapatuza(copiaPuestos, personas); 
 }
-void FachadaLollapatuza::registrarCompra(Persona persona, Producto producto,
-                                         Nat cant, IdPuesto idPuesto) {
+void FachadaLollapatuza::registrarCompra(Persona persona, Producto producto, Nat cant, IdPuesto idPuesto) {
     _lolla.registrarCompra(idPuesto, persona, producto, cant);
 }
 
@@ -41,19 +39,15 @@ const set<Persona> &FachadaLollapatuza::personas() const {
     return _lolla.obtenerPersonas();
 }
 
-Nat FachadaLollapatuza::stockEnPuesto(IdPuesto idPuesto,
-                                      const Producto &producto) const {
+Nat FachadaLollapatuza::stockEnPuesto(IdPuesto idPuesto, const Producto &producto) const {
     return _lolla.stockEnPuesto(idPuesto, producto);
 }
 
-Nat FachadaLollapatuza::descuentoEnPuesto(IdPuesto idPuesto,
-                                          const Producto &producto,
-                                          Nat cantidad) const {
+Nat FachadaLollapatuza::descuentoEnPuesto(IdPuesto idPuesto, const Producto &producto, Nat cantidad) const {
     return _lolla.descuentoEnPuesto(idPuesto, producto, cantidad);
 }
 
-Nat FachadaLollapatuza::gastoEnPuesto(IdPuesto idPuesto,
-                                      Persona persona) const {
+Nat FachadaLollapatuza::gastoEnPuesto(IdPuesto idPuesto, Persona persona) const {
     return _lolla.gastoEnPuesto(idPuesto, persona);
 }
 
