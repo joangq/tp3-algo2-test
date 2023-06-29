@@ -202,7 +202,6 @@ TEST_F(LollapatuzaTest, hackear ){
 	EXPECT_TRUE(true); // TODO
 }
 // -------------------------------------------------------------------------------------------
-// FIXME: puesto no tiene un constructor default
 class PuestoTest : public testing::Test {
 protected:
     Menu menu;
@@ -237,6 +236,7 @@ protected:
 		puestos = {{1, puesto1}, {2, puesto2}, {3, puesto3}};
 	}
 };
+
 
 
 
@@ -314,6 +314,7 @@ TEST_F(PuestoTest, precioConDescuento){
 	EXPECT_EQ(puesto1.precioConDescuento(8,3), 810);
 	EXPECT_FALSE(puesto1.precioConDescuento(8, 2) == 540);
 
+	// probar estos con decimales
 	//EXPECT_EQ(puesto2.precioConDescuento(9, 4), 2854.72);
 	//EXPECT_EQ(puesto2.precioConDescuento(15, 4), 391.16);
 
@@ -329,10 +330,21 @@ TEST_F(PuestoTest, precioSinDescuento){
 
 }
 
+TEST_F(PuestoTest, obtener){
+    EXPECT_EQ(puesto1.stock(), stock1);
+    EXPECT_EQ(puesto2.stock(), stock2);
+    EXPECT_FALSE(puesto3.stock() == stock1);
+
+    EXPECT_EQ(puesto1.obtenerMenu(), menu);
+
+    EXPECT_EQ(puesto1.promociones(), descuentos1);
+    EXPECT_FALSE(puesto2.promociones() == descuentos3);
+
+}
+
 
 // -------------------------------------------------------------------------------------------
 
-// -------------------------------------------------------------------------------------------
 
 
 int main(int argc, char* argv[]) {
