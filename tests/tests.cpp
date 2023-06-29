@@ -179,13 +179,16 @@ TEST_F(LollapatuzaTest, SaberPersonas){
 }
 
 TEST_F(LollapatuzaTest, SaberPuestos) {
-	diccLog<IdPuesto, Puesto> puestosDeLolla = lolla.obtenerPuestos();
-	set<IdPuesto> claves = {};
-	for(pair<const unsigned int, Puesto> clave: puestosDeLolla){
-		claves.emplace(clave);
-	}
+	/*
+		J: Éste código tiene múltiples problemas lmao
+		diccLog<IdPuesto, Puesto> puestosDeLolla = lolla.obtenerPuestos();
+		set<IdPuesto> claves = {};
+		for(pair<const unsigned int, Puesto> clave: puestosDeLolla){
+			claves.emplace(clave);
+		}
 
-	EXPECT_EQ(claves, claves);
+		EXPECT_EQ(claves, claves);
+	*/
 }
 
 TEST_F(LollapatuzaTest, hackear ){
