@@ -2,8 +2,6 @@
 #include "gtest-1.8.1/gtest.h"
 #include <set>
 
-#include <iostream>
-
 using namespace std;
 
 class LollaTest : public testing::Test {
@@ -16,7 +14,7 @@ protected:
     aed2_Puesto puesto2, puesto6, puesto7;
     map<IdPuesto, aed2_Puesto> puestos;
 
-    void SetUp() {
+    void SetUp() override {
         menu = {{3, 500}, {4, 1000}, {5, 2500}, {7, 2000}};
         personas = {2, 4, 8, 9};
         personas89 = {8, 9};
