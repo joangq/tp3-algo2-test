@@ -92,9 +92,8 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
 
     Cant cantCompras = puestoAHackear->cantComprasSinDesc(persona, item);
 
-    if (cantCompras == 0) {
+    if (cantCompras == 0)
         hackeablesItem.removerMinimo();
-    }
 
 
     Nat precioItem = puestoAHackear->precioSinDescuento(item, 1);
