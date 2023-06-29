@@ -24,7 +24,7 @@ minHeap::minHeap(Nat n) {
 }
 
 void minHeap::agregar(TupPuesto tup) {
-    int i = tamActual;
+    Nat i = tamActual;
     nodos[i] = tup;
     tamActual++;
 
@@ -49,10 +49,10 @@ void minHeap::removerMinimo() {
     hacerMinHeap(0);
 }
 
-void minHeap::hacerMinHeap(int i) {
-    int izq = Izq(i);
-    int der = Der(i);
-    int menor = i;
+void minHeap::hacerMinHeap(Nat i) {
+    Nat izq = Izq(i);
+    Nat menor = i;
+    Nat der = Der(i);
 
     if (izq < tamActual and nodos[izq].id < nodos[menor].id)
         menor = izq;
@@ -66,7 +66,7 @@ void minHeap::hacerMinHeap(int i) {
     }
 }
 
-void minHeap::swap(int i, int j) {
+void minHeap::swap(Nat i, Nat j) {
     TupPuesto temp = nodos[i];
     nodos[i] = nodos[j];
     nodos[j] = temp;

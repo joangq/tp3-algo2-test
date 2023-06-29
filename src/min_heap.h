@@ -28,8 +28,8 @@ class minHeap {
     vector<TupPuesto> nodos;
     int tamActual;
 
-    void hacerMinHeap(int i);
-    void swap(int i, int j);
+    void hacerMinHeap(Nat i);
+    void swap(Nat i, Nat j);
 };
 
 #endif  // MIN_HEAP_H
