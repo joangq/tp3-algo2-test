@@ -18,17 +18,15 @@ Puesto::Puesto(Menu precios, Stock stocks, const Promociones& descuentos) {
 
         vector<Cant> temp(dicc.size());
 
-        int k = 0;
         // Itero sobre las tuplas (Cant, Nat)
-        for (auto& infoDescuento : dicc) {
-            temp[k] = infoDescuento.first;
-            ++k;
-        }
+        int k = 0;
+        for (auto& infoDescuento : dicc)
+            temp[k++] = infoDescuento.first;
 
         temp = mergeSort(temp);
 
         // En esta asignación, la copia es implícita.
-        this->_descuentosPorItem[item] = temp;
+        this->_descuentosPorItem[item] = std::move(temp);
     }
 
     this->_stock = std::move(stocks);
