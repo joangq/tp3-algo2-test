@@ -14,7 +14,8 @@ Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() { };
 
 Lollapatuza::Lollapatuza() : _puestos(), _infoPersonas(), _gastosPersonas(), _personas() {};
 
-Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Persona>& personas) : _gastosPersonas(puestos.size(), idMaximo(personas)) {
+Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Persona>& personas) {
+    _gastosPersonas = maxHeap(puestos.size(), idMaximo(personas));
     // Creo una lista que contenga todos los items, y la lleno.
     set<Item> totalItems = set<Item>();
 
@@ -60,11 +61,11 @@ Lollapatuza Lollapatuza::operator=(const Lollapatuza& lolla) {
 }
 
 void Lollapatuza::registrarCompra(IdPuesto pid, Persona persona, Producto item, Cantidad cant) {
-    Puesto puesto = this->_puestos.at(pid);
-    puesto.vender(persona, item, cant);
+    Puesto& puesto = this->_puestos.at(pid);
+    (&puesto)->vender(persona, item, cant);
 
     infoCompras& compras = this->_infoPersonas[persona];
-    int precioConDescuento = puesto.precioConDescuento(item, cant);
+    int precioConDescuento = (&puesto)->precioConDescuento(item, cant);
     compras.gastoTotal += precioConDescuento;
 
     // J: Se puede resumir en el mismo if?
