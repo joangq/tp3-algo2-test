@@ -2,7 +2,7 @@
 
 FachadaLollapatuza::FachadaLollapatuza(
     const set<Persona> &personas,
-    const map<IdPuesto, aed2_Puesto> &infoPuestos) {
+    const map<IdPuesto, aed2_Puesto> &infoPuestos) : _lolla() {
     
     map<IdPuesto, Puesto> copiaPuestos;
 

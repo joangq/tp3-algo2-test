@@ -16,13 +16,12 @@ maxHeap::maxHeap() {
 }
 
 maxHeap::maxHeap(int n, int maxid) {
-    indicesPersona.resize(maxid + 1);
-    indicesPersona.reserve(maxid + 1);
+    for (int i = 0; i < n; i++)
+        nodos.push_back(Nodo(0, 0));
 
-    nodos.resize(n);
-    nodos.reserve(n);
+    for (int i = 0; i < maxid + 1; i++)
+            indicesPersona.push_back(0);        
     
-
     tamActual = 0;
 }
 

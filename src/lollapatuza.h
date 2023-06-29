@@ -24,7 +24,7 @@ class Lollapatuza {
          * Complejidad: O(I^2 P + (I log I) + A (I*P + log A))
          * */
         Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Persona>& personas);
-
+        
         // Operador de asignación
         Lollapatuza operator=(const Lollapatuza& lolla);
 

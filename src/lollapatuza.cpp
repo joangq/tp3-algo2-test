@@ -12,15 +12,11 @@ Lollapatuza::infoCompras::infoCompras(Dinero gastoTotal, diccLog<Producto, minHe
 
 Lollapatuza::infoCompras::infoCompras() : gastoTotal(0), hackeables() { };
 
-Lollapatuza::Lollapatuza() { };
+Lollapatuza::Lollapatuza() : _puestos(), _infoPersonas(), _gastosPersonas(), _personas() {};
 
-Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Persona>& personas) :
- _gastosPersonas(puestos.size(),
-idMaximo(personas)),
-_puestos(puestos),
-_personas(personas) {
+Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto>& puestos, const set<Persona>& personas) : _gastosPersonas(puestos.size(), idMaximo(personas)) {
     // Creo una lista que contenga todos los items, y la lleno.
-    set<Item> totalItems;
+    set<Item> totalItems = set<Item>();
 
     // Itero sobre las tuplas de (IdPuesto, Puesto).
     for (auto const& tup : puestos) {
@@ -36,9 +32,8 @@ _personas(personas) {
         }
     }
 
-    map<Nat, minHeap> dic;
+    map<Nat, minHeap> dic = map<Nat, minHeap>();
 
-    // J: Moví el constructor para que esté inline
     for (auto item : totalItems)
         dic[item] = minHeap(puestos.size()); // Copia implícita.
 
@@ -49,6 +44,9 @@ _personas(personas) {
         infoCompras compras = infoCompras(0, dic);
         this->_infoPersonas[persona] = compras;
     }
+
+    this->_personas = personas;
+    this->_puestos = puestos;
 }
 
 Lollapatuza Lollapatuza::operator=(const Lollapatuza& lolla) {
