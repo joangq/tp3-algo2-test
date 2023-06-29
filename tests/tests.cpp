@@ -178,8 +178,8 @@ TEST_F(LollapatuzaTest, SaberPersonas){
 	EXPECT_EQ(persDeLolla, personas);
 }
 
-TEST_T(LollapatuzaTest, SaberPuestos){
-	diccLog<IdPuesto, Puesto> puestosDeLolla = *lolla.obtenerPuestos();
+TEST_F(LollapatuzaTest, SaberPuestos) {
+	diccLog<IdPuesto, Puesto> puestosDeLolla = lolla.obtenerPuestos();
 	set<idPuesto> claves = {};
 	for(IdPuesto clave: puestosDeLolla){
 		claves.pushBack(clave);
