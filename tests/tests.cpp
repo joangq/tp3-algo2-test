@@ -181,7 +181,7 @@ TEST_F(LollapatuzaTest, SaberPersonas){
 TEST_F(LollapatuzaTest, SaberPuestos) {
 	diccLog<IdPuesto, Puesto> puestosDeLolla = lolla.obtenerPuestos();
 	set<IdPuesto> claves = {};
-	for(IdPuesto clave: puestosDeLolla){
+	for(pair<const unsigned int, Puesto> clave: puestosDeLolla){
 		claves.emplace(clave);
 	}
 
