@@ -93,10 +93,10 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
         return;
 
     puestoAHackear->olvidarItem(persona, item);
-    
-    Cant cantItem = puestoAHackear->cantComprasSinDesc(persona, item);
 
-    if (cantItem == 0) {
+    Cant cantCompras = puestoAHackear->cantComprasSinDesc(persona, item);
+
+    if (cantCompras == 0) {
         hackeablesItem.removerMinimo();
     }
 
