@@ -22,7 +22,7 @@ Lollapatuza::Lollapatuza()
 Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Persona> &personas) {
     _gastosPersonas = maxHeap(puestos.size(), idMaximo(personas));
     // Creo una lista que contenga todos los items, y la lleno.
-    set<Item> totalItems = set<Item>();
+    set<Producto> totalItems = set<Producto>();
 
     // Itero sobre las tuplas de (IdPuesto, Puesto).
     for (auto const &tup: puestos) {
@@ -32,7 +32,7 @@ Lollapatuza::Lollapatuza(const diccLog<IdPuesto, Puesto> &puestos, const set<Per
 
         // Itero sobre las tuplas de (Item, Cant).
         for (auto const &itemTup: stock) {
-            Item item = itemTup.first;
+            Producto item = itemTup.first;
             // std::set no inserta el elemento si ya está en el conjunto.
             totalItems.emplace(item);
         }
@@ -88,7 +88,7 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
 
     puestoAHackear->olvidarItem(persona, item);
 
-    Cant cantCompras = puestoAHackear->cantComprasSinDesc(persona, item);
+    Cantidad cantCompras = puestoAHackear->cantComprasSinDesc(persona, item);
 
     if (cantCompras == 0)
         hackeablesItem.removerMinimo();
@@ -121,7 +121,7 @@ Persona Lollapatuza::personaMayorGasto() const {
 IdPuesto Lollapatuza::menorStock(Producto item) const {
     int menorStock = -1;
     int menorId = -1;
-    Cant stockItem;
+    Cantidad stockItem;
 
     // Itero sobre las tuplas (IdPuesto, Puesto)
     for (auto const &infoPuesto: _puestos) {

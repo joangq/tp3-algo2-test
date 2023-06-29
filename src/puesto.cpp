@@ -12,10 +12,10 @@ Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc() {}
 Puesto::Puesto(const Menu& precios, const Stock& stocks, const Promociones& descuentos) {
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
     for (auto& itemDescuentos : descuentos) {
-        Item item = itemDescuentos.first;
-        const map<Cant, Nat>& dicc = itemDescuentos.second;
+        Producto item = itemDescuentos.first;
+        const map<Cantidad, Nat>& dicc = itemDescuentos.second;
 
-        vector<Cant> descPorItem(dicc.size());
+        vector<Cantidad> descPorItem(dicc.size());
 
         // Itero sobre las tuplas (Cant, Nat)
         int k = 0;
@@ -40,7 +40,7 @@ const Cantidad& Puesto::obtenerStock(const Producto& item) const {
 Descuento Puesto::obtenerDescuento(const Producto& item, const Cantidad& cant) const {
     if (cant == 0 || _descuentosPorItem.count(item) == 0) return 0;
 
-    const vector<Cant>& cantidades = _descuentosPorItem.at(item);
+    const vector<Cantidad>& cantidades = _descuentosPorItem.at(item);
 
     if (cant < cantidades[0]) return 0;
 
@@ -54,7 +54,7 @@ Dinero Puesto::obtenerGasto(const Persona& persona) const {
 }
 
 void Puesto::vender(const Persona& persona, const Producto& item, const Cantidad& cant) {
-    const Cant& stockItem = _stock[item];
+    const Cantidad& stockItem = _stock[item];
     Dinero& gastoPersona = _gastoPorPersona[persona];
 
     const Dinero& precioBase = precioSinDescuento(item, cant);
@@ -74,7 +74,7 @@ void Puesto::vender(const Persona& persona, const Producto& item, const Cantidad
 
 void Puesto::olvidarItem(const Persona& persona, const Producto& item) {
     comprasPorItem& comprasPersonas = _comprasPorPersona[persona];
-    list<Cant>& comprasItem = comprasPersonas.sinDesc[item];
+    list<Cantidad>& comprasItem = comprasPersonas.sinDesc[item];
     Nat& compra = comprasItem.front();
 
     compra -= 1;

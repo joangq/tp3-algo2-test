@@ -8,10 +8,10 @@
 
 struct Nodo {
     Nat gasto;
-    Id id;
+    Persona id;
 
     Nodo();
-    Nodo(Nat gasto, Id id);
+    Nodo(Nat gasto, Persona id);
 };
 
 class maxHeap {
@@ -20,7 +20,7 @@ class maxHeap {
     maxHeap(Nat n, Nat maxid);
 
     void agregar(Nodo elem);
-    Id maximo() const;
+    Persona maximo() const;
     void removerMaximo();
 
     void modificarGasto(Persona persona, Nat nuevoGasto);

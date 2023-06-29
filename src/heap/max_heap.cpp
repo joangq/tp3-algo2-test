@@ -3,7 +3,7 @@
 
 Nodo::Nodo() : gasto(0), id(0) {}
 
-Nodo::Nodo(Nat gasto, Id id) : gasto(gasto), id(id) {}
+Nodo::Nodo(Nat gasto, Persona id) : gasto(gasto), id(id) {}
 
 maxHeap::maxHeap() : tamActual(0) {}
 
@@ -32,7 +32,7 @@ void maxHeap::agregar(Nodo elem) {
     siftUp(i);
 }
 
-Id maxHeap::maximo() const {
+Persona maxHeap::maximo() const {
     // Le sumo 1 porque antes le había restado 1.
     return nodos[0].id - 1;
 }

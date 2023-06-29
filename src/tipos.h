@@ -3,7 +3,6 @@
 
 #include <string>
 #include <map>
-#include <queue>
 
 using namespace std;
 
@@ -25,13 +24,6 @@ using Producto = Nat;
 using Stock = map<Producto, Nat>;
 using Promociones = map<Producto, map<Nat, Nat>>;
 using Menu = map<Producto, Nat>;
-
-// Tipos agregados por nosotros
-using Cant = Nat;
-//using Descuento = int;
-// using Dinero = int;
-using Id = Nat;
-using Item = Nat;
 
 struct aed2_Puesto {
     Stock stock;
