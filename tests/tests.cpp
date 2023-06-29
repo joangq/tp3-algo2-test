@@ -171,7 +171,7 @@ class LollapatuzaTest : public testing::Test{
 		lolla = Lollapatuza(puestos, personas);
     }
 
-}
+};
 
 TEST_F(LollapatuzaTest, SaberPersonas){
 	set<Persona> persDeLolla = *lolla.obtenerPersonas(); 
