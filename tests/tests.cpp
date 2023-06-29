@@ -3,6 +3,7 @@
 #include "../src/max_heap.h"
 #include "../src/min_heap.h"
 #include "../src/heap_aux.h"
+#include "../src/lollapatuza.h"
 
 TEST(testsAuxiliares, binary_search_tipico) {
 	vector<Nat> A = {5, 6, 9, 10, 20, 37, 38, 41, 42, 49};
