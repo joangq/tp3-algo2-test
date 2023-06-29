@@ -156,6 +156,7 @@ class LollapatuzaTest : public testing::Test{
 
     void SetUp() {
         menu = {{3, 500}, {4, 1000}, {5, 2500}, {7, 2000}};
+		
         personas = {2, 4, 8, 9};
         personas89 = {8, 9};
         personas49 = {4, 9};
@@ -181,11 +182,17 @@ TEST_F(LollapatuzaTest, SaberPersonas){
 }
 
 TEST_T(LollapatuzaTest, SaberPuestos){
-	//test para preguntarle los puestos al lolla
+	diccLog<IdPuesto, Puesto> puestosDeLolla = *lolla.obtenerPuestos();
+	set<idPuesto> claves= <>;
+	for(IdPuesto clave: puestosDeLolla){
+		claves.pushBack(clave);
+	}
+
+	EXPECT_EQ(claves, idsPuestos);
 }
 
 TEST_F(LollapatuzaTest, hackear ){
-	//test que analice en hackeo
+	
 
 }
 // -------------------------------------------------------------------------------------------
