@@ -12,16 +12,16 @@ Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc() {};
 
 Puesto::Puesto(Menu precios, Stock stocks, const Promociones& descuentos) {
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
-    for (auto& tup : descuentos) {
-        Item item = tup.first;
-        const map<Cant, Nat>& dicc = tup.second;
+    for (auto& itemDescuentos : descuentos) {
+        Item item = itemDescuentos.first;
+        const map<Cant, Nat>& dicc = itemDescuentos.second;
 
         vector<Cant> temp(dicc.size());
 
         int k = 0;
         // Itero sobre las tuplas (Cant, Nat)
-        for (auto& tup : dicc) {
-            temp[k] = tup.first;
+        for (auto& infoDescuento : dicc) {
+            temp[k] = infoDescuento.first;
             ++k;
         }
 
