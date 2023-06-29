@@ -111,7 +111,7 @@ Nat Puesto::cantComprasSinDesc(Persona persona, Producto item) const {
     if (_comprasPorPersona.count(persona) == 1) {
         const diccLog<Producto, list<Cantidad>>& d = _comprasPorPersona.at(persona).sinDesc;
         if (d.count(item) == 1)
-            return d.at(item).size();
+            return d.at(item).front();
     }
     
     return 0;
