@@ -15,7 +15,17 @@ minHeap::minHeap() {
 }
 
 minHeap::minHeap(int n) {
-    for (int i = 0; i < n; i++)
+    unsigned int v = n;
+
+    v--;
+    v |= v >> 1;
+    v |= v >> 2;
+    v |= v >> 4;
+    v |= v >> 8;
+    v |= v >> 16;
+    v++;
+
+    for (int i = 0; i < v; i++)
         nodos.push_back(TupPuesto(0, nullptr));
 
     tamActual = 0;
@@ -35,6 +45,9 @@ void minHeap::agregar(TupPuesto tup) {
 }
 
 Puesto* minHeap::minimo() const {
+    if (tamActual == 0)
+        return nullptr;
+
     return nodos[0].puesto;
 }
 

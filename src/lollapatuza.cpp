@@ -89,6 +89,9 @@ void Lollapatuza::hackear(Persona persona, Producto item) {
     minHeap& hackeablesItem = compras.hackeables[item];
     Puesto* puestoAHackear = hackeablesItem.minimo();
 
+    if (puestoAHackear == nullptr)
+        return;
+
     Cant cantItem = puestoAHackear->cantComprasSinDesc(persona, item);
 
     if (cantItem == 1)

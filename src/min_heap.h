@@ -26,7 +26,7 @@ class minHeap {
 
    private:
     vector<TupPuesto> nodos;
-    Nat tamActual;
+    int tamActual;
 
     void hacerMinHeap(int i);
     void swap(int i, int j);
