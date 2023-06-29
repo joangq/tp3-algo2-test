@@ -148,7 +148,6 @@ class LollapatuzaTest : public testing::Test{
 	Lollapatuza lolla;
 	Menu menu;
     set<Persona> personas, personas89, personas49;
-    set<IdPuesto> idsPuestos;
     Stock stock2, stock6, stock7;
     Promociones descuentos2, descuentos6, descuentos7;
     aed2_Puesto puesto2, puesto6, puesto7;
@@ -156,11 +155,9 @@ class LollapatuzaTest : public testing::Test{
 
     void SetUp() {
         menu = {{3, 500}, {4, 1000}, {5, 2500}, {7, 2000}};
-		
         personas = {2, 4, 8, 9};
         personas89 = {8, 9};
         personas49 = {4, 9};
-        idsPuestos = {2, 6, 7};
         stock2 = {{3, 10}, {4, 5}, {5, 30}, {7, 10}};
         stock6 = {{3, 5}, {4, 15}, {5, 25}, {7, 5}};
         stock7 = {{3, 20}, {4, 20}, {5, 20}, {7, 20}};
@@ -171,7 +168,7 @@ class LollapatuzaTest : public testing::Test{
         puesto6 = {stock6, descuentos6, menu};
         puesto7 = {stock7, descuentos7, menu};
         puestos = {{2, puesto2}, {6, puesto6}, {7, puesto7}};
-		lolla = Lollapatuza(idsPuestos, personas);
+		lolla = Lollapatuza(puestos, personas);
     }
 
 }
