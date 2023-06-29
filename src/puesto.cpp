@@ -118,14 +118,14 @@ Dinero Puesto::precioSinDescuento(const Producto& item, const Cantidad& cant) co
     return _precios.at(item) * cant;
 }
 
-Menu& Puesto::obtenerMenu() {
+const Menu& Puesto::obtenerMenu() {
     return this->_precios;
 }
 
-Stock& Puesto::stock() {
+const Stock& Puesto::stock() {
     return this->_stock;
 }
 
-Promociones& Puesto::promociones() {
+const Promociones& Puesto::promociones() {
     return this->_descuentos;
 }

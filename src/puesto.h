@@ -76,9 +76,9 @@ class Puesto {
          * Precondicion: Nada
          * Complejidad: O(1)
         */
-        Menu& obtenerMenu();
-        Stock& stock();
-        Promociones& promociones();
+        const Menu& obtenerMenu();
+        const Stock& stock();
+        const Promociones& promociones();
 
     private:
         /* comprasPorItem */
