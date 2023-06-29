@@ -53,6 +53,8 @@ Tengo pendiente agregar una configuración para Valgrind, pero por ahora me inte
 # TODO List - Cosas pendientes
 *Objetivo:* Pasar todos los tests de la cátedra sin memory leaks.
 
+- [ ] Corroborar que los parámetros por copia no arruinen las complejidades.
+  - [ ] (Opcional) Anotar las complejidades
 - [x] Pasar el pseudocódigo a C++
 - [ ] Escribir tests para cada componente.
   - [x] maxHeap
