@@ -59,7 +59,7 @@ Tengo pendiente agregar una configuración para Valgrind, pero por ahora me inte
 - [ ] Escribir tests para cada componente.
   - [x] maxHeap
   - [x] minHeap
-  - [ ] Puesto
+  - [x] Puesto
   - [ ] Lollapatuza
 - [x] Pasar los tests personales y que cada componente no leakee.
   - [x] maxHeap
