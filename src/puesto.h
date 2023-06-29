@@ -22,7 +22,7 @@ class Puesto {
          * Precondicion: El item debe existir en el menu.
          * Complejidad: O(log I)
         */
-        Cantidad obtenerStock(const Producto& item) const;
+        const Cantidad& obtenerStock(const Producto& item) const;
 
         /** ObtenerDescuento
          * Precondicion: El item debe existir en el menu.

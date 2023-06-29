@@ -7,7 +7,7 @@
 
 Puesto::Puesto() = default;
 
-Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc() {};
+Puesto::comprasPorItem::comprasPorItem(): conDesc(), sinDesc() {}
 
 Puesto::Puesto(const Menu& precios, const Stock& stocks, const Promociones& descuentos) {
     // Itero sobre las tuplas (Item, map<Nat, Nat>)
@@ -33,7 +33,7 @@ Puesto::Puesto(const Menu& precios, const Stock& stocks, const Promociones& desc
 
 }
 
-Cantidad Puesto::obtenerStock(const Producto& item) const {
+const Cantidad& Puesto::obtenerStock(const Producto& item) const {
     return this->_stock.at(item);
 }
 
