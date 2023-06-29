@@ -17,7 +17,7 @@ struct Nodo {
 class maxHeap {
    public:
     maxHeap();
-    maxHeap(int n, int maxid);
+    maxHeap(int n, Nat maxid);
 
     void agregar(Nodo elem);
     Id maximo() const;

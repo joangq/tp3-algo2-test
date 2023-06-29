@@ -15,9 +15,9 @@ maxHeap::maxHeap() {
     tamActual = 0;
 }
 
-maxHeap::maxHeap(int n, int maxid) {
+maxHeap::maxHeap(int n, Nat maxid) {
     // Busco la potencia de 2 más cercana a v
-    unsigned int v = n;
+    Nat v = n;
 
     v--;
     v |= v >> 1;
