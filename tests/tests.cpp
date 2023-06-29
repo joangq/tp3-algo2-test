@@ -61,7 +61,7 @@ protected:
     maxHeap h;
 
     void SetUp() override {
-        h = {n, maxid};
+        h = maxHeap(n, maxid);
 
         for (int i = 0; i <= 10; i++) {
             h.agregar(Nodo(i, i));
@@ -107,7 +107,7 @@ protected:
     Puesto puesto1, puesto2, puesto3;
 
     void SetUp() override {
-        h = {n};
+        h = minHeap(n);
 
         menu = {{8, 300}, {9, 811}, {13, 1000}, {15, 127}};
         idsPuestos = {1, 2, 3};
