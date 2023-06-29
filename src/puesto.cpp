@@ -35,7 +35,7 @@ Puesto::Puesto(const Menu& precios, const Stock& stocks, const Promociones& desc
 
 }
 
-Cantidad Puesto::obtenerStock(Producto item) const {
+Cantidad Puesto::obtenerStock(const Producto& item) const {
     return this->_stock.at(item);
 }
 
